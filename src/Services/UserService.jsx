@@ -129,3 +129,58 @@ export const fetchUserBookingHistory= async()=>{
   }
 
 };
+
+export const fetchReview = async (doctorId)=>{
+  try{
+    const token = await getAccess()
+    const token1 = getAccessToken()
+    const headers = {
+      Authorization:`Bearer ${token1}`,
+    };
+    const response = await axios.get (`${server}/review/review-list/${doctorId}/`,
+    {headers}
+    );
+    return response.data
+  }catch(error){
+    console.error('error for fetching review:',error)
+    return null
+  }
+}
+
+export const createReview = async (formData)=>{
+  try{
+    const token= await getAccess();
+    const token1= getAccessToken()
+    const headers = {
+      Authorization :`Bearer ${token}`,
+    };
+    const response = await axios.post(`${server}/review/create/`,formData,{
+      headers
+    })
+    return response.data
+
+  }catch(error){
+    console.log('error creating review:',error)
+    return null
+  }
+}
+
+
+export const updateReview = async (review_id,formData)=>{
+  try{
+  const token= await getAccess();
+  const token1= getAccessToken()
+  const headers = {
+    Authorization : `Bearer ${token}`,
+  };
+  const response = await axios.put(`${server}/review/update/${review_id}/`,formData,{
+    headers
+  })
+  return response.data
+}catch(error){
+  console.error('error for updating review:',error)
+
+  return null
+}
+
+}

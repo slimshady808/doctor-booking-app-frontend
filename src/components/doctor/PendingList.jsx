@@ -61,9 +61,7 @@ const PendingList = () => {
             <th scope="col" className="px-6 py-3">
               Report
             </th>
-            <th scope="col" className="px-6 py-3">
-              Test
-            </th>
+           
           </tr>
         </thead>
         <tbody>
@@ -86,24 +84,13 @@ const PendingList = () => {
                   
                   className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
                 >
-               <Link to={`/doctor/addReport/${bookingItem.booking_id}/${bookingItem.patient_id}/${doctorId}`}>add/edit</Link>
+               <Link to={`/doctor/addReport/${bookingItem.booking_id}/${bookingItem.patient_id}/${doctorId}`}>add</Link>
                
 
                   
                 </a>
               </td>
-              <td className="px-6 py-4">
-                <a
-                  
-                  className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                >
-                
-                <Link to={`/doctor/addTest/${bookingItem.booking_id}/${bookingItem.patient_id}/${doctorId}`}>add/edit</Link>
-               
-              
-                  
-                </a>
-              </td>
+             
             </tr>
           ))}
         </tbody>

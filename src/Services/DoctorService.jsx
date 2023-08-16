@@ -10,7 +10,7 @@ import { toast } from "react-hot-toast";
 export const fetchPendingBooking = async (doctorId) => {
   try {
     const token =await getAccess();
-    const token1 = getAccessToken(); // Replace with your token retrieval logic
+    const token1 = getAccessToken(); 
     const headers = {
       Authorization: `Bearer ${token1}`,
     };
@@ -111,11 +111,11 @@ export const get_test_titles = async()=>{
     const token = getAccessToken();
     const response = await axios.get(
       `${server}/report/test-titles/`,
-      // {
-      //   headers:{
-      //     Authorization :`Bearer ${token1}`,
-      //   }
-      // }
+      {
+        headers:{
+          Authorization :`Bearer ${token1}`,
+        }
+      }
     )
     return response.data
   }catch(error){
@@ -131,7 +131,7 @@ export const createTest = async (testData)=>{
       Authorization: `Bearer ${token}`,
     };
     const response = await axios.post(`${server}/report/test-create/`,testData,{
-      // headers,
+      headers,
     });
     return response.data
   }catch(error){

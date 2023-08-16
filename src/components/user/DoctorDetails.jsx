@@ -39,7 +39,7 @@ export const DoctorDetails = () => {
     };
     fetchData();
   }, []);  
-console.log(doctor,'doc')
+// console.log(doctor,'doc')
 useEffect(()=>{
   const fetchData = async ()=>{
     const data = await fetchDepartmentById(departmentId);
@@ -274,7 +274,7 @@ useEffect(()=>{
      
     </div>
    <div className=' w-1/2 '>
-   <ReviewComponent/>
+   <ReviewComponent doctorId={doctorId}/>
    </div>
    </div>
   </div>
