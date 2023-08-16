@@ -1,5 +1,6 @@
 import axios from "axios";
-
+import {getAccess,getAccessToken} from '../helpers/auth'
+import {server} from '../server'
 export const fetchDoctorData = async (doctorId) => {
   try {
     const response = await axios.get(`http://localhost:8000/doctor/doctor/${doctorId}/`);
@@ -49,3 +50,82 @@ export const fetchAvailableDates = async (doctorId)=>{
     return null
   }
 }
+
+export const fetchAvailableSlots = async (doctorId,date)=>{
+  try{
+    const response = await axios.get(`http://localhost:8000/doctor/get_available_slots/${doctorId}/?date=${date}`);
+    return response.data.available_slots
+  }catch(error){
+    console.log('error of getting available slotes:',error)
+    return null
+  }
+}
+
+export const fetchPatients = async (userId)=>{
+  try{
+    const response = await axios.get(`http://localhost:8000/api/patients/${userId}/`)
+    return response.data
+  }catch(error){
+    console.error('error of getting patients:',error)
+    return null
+  }
+}
+export const createPatient= async (newPatientDetails)=>{
+  try {
+    const response = await axios.post(`${server}/api/create-patient/`, newPatientDetails);
+    console.log("Patient created successfully:", response.data.id);
+    return response.data.id;
+  }
+  catch(error){
+    console.error("Error creating patient:", error);
+  }
+}
+export const createBooking = async (bookingData)=>{
+  try{
+    const token1 = await getAccess();
+    const token = getAccessToken();
+    console.log(token1,'token1')
+    console.log(token,'token')
+    const response = await axios.post(`${server}/booking/create/`,bookingData,{
+      headers:{
+        Authorization:`Bearer ${token1}`,
+      },
+    });
+    console.log(response.data)
+    return response.data.booking_id
+  }catch(error){
+    console.error("Error creating booking:", error);
+}
+}
+
+export const fetchSlotData = async (slotid)=>{
+  try{
+    const response=await axios.get(`${server}/doctor/slot/${slotid}/`)
+    console.log(response.data,'function')
+    return response.data
+  }catch(error){
+    console.log('error for fetching slot details')
+    return null
+  }
+}
+
+
+export const fetchUserBookingHistory= async()=>{
+  try{
+    const token1 = await getAccess();
+    const token = getAccessToken();
+    console.log(token1)
+    const headers={
+      Authorization : `Bearer ${token1}`,
+    };
+    const response = await axios.get (
+        `${server}/booking/user-booking-history/`,
+        {headers}
+    );
+    return response.data
+  }catch(error){
+    console.log('error fetchig user booking history:',error)
+    return null
+  }
+
+};

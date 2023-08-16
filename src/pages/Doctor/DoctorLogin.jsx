@@ -20,9 +20,10 @@ export const DoctorLogin = () => {
     try{
       const response = await doctor_login(e)
       
-      history('/doctor_home')
+      history('/doctor/home')
     }catch(error){
       toast.error('invalid credential')
+      history('/login')
     }
     
     
