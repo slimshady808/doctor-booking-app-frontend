@@ -33,22 +33,7 @@ export const AddTestResult = (props) => {
     console.log()
   }
 
-  // const handleSubmit = async () => {
-  //   const formData = new FormData();
-  //   formData.append('test_title', selectedTest);
-  //   formData.append('report', reportId);
-  //   formData.append('date_of_test', new Date().toISOString().split('T')[0]);
-  //   formData.append('result', result); // Append the selected PDF file
-  //   formData.append('notes', notes);
-  //   console.log(formData)
-  //   try {
-  //     // Make an API call to send formData
-  //     const response = await createReport(formData);
-  //     console.log('Test result uploaded:', response);
-  //   } catch (error) {
-  //     console.error('Error uploading test result:', error);
-  //   }
-  // }
+
 
   const handleSubmit = async ()=>{
     if (!selectedTest || ! notes){
@@ -67,6 +52,11 @@ export const AddTestResult = (props) => {
     const data= await createTest(formData)
     if (data){
       toast.success('result added')
+      toggleModal()
+      setTestTitles([]);
+      setSelectedTest('');
+      setResult('');
+      setNotes('');
     }else{
       toast.error('error occured')
     }
@@ -171,7 +161,7 @@ export const AddTestResult = (props) => {
       Save Test Result
     </button>
   </div>
-      </div>
+ </div>
 
     )}
   </>

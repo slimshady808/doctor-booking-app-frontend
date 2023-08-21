@@ -13,7 +13,7 @@ export const DoctorHistory = () => {
     const token=getAccessToken()
     const decode=jwt_decode(token)
     setDoctorId(decode.user_id)
-    console.log(decode.user_id)
+    // console.log(decode.user_id)
   },[])
 
   useEffect(()=>{
@@ -55,10 +55,7 @@ console.log(booking)
               status
             </th>
             <th scope="col" className="px-6 py-3">
-              Report
-            </th>
-            <th scope="col" className="px-6 py-3">
-              Report
+              Medical Report
             </th>
           </tr>
         </thead>
@@ -82,15 +79,8 @@ console.log(booking)
                   href="#"
                   className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
                 >
-                  <Link to={`/doctor/addReport/${bookingItem.booking_id}/${bookingItem.patient_id}/${doctorId}`}>edit</Link>
-                </a>
-              </td>
-              <td className="px-6 py-4">
-                <a
-                  href="#"
-                  className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                >
-                  <Link to={`/doctor/addReport/${bookingItem.booking_id}/${bookingItem.patient_id}/${doctorId}`}>view</Link>
+                  <Link to={`/doctor/addReport/${bookingItem.booking_id}/${bookingItem.patient_id}/${doctorId}`}>Report</Link>/
+                  test
                 </a>
               </td>
             </tr>

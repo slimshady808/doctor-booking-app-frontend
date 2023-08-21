@@ -31,7 +31,7 @@ export const UserBookings = () => {
 
 
       {bookings.map((booking) => {
-  {/* const imageUrl = 'http://localhost:8000/media/doctor_images/docb_DKEDVyD.jpeg'; */}
+  
   const imageUrl = `http://localhost:8000/media/${booking.doctor_image}`;
 
   return (

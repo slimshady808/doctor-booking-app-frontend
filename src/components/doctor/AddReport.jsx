@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import {createReport,getReport,updateReport} from '../../Services/DoctorService'
 import {Toaster, toast} from 'react-hot-toast'
 import { AddTestResult } from './AddTestResult';
+import { DoctorViewReport } from './DoctorViewReport';
 
 export const AddReport = () => {
   const { bookingId,patientId,doctorId } = useParams();
@@ -108,8 +109,9 @@ console.log(reportId,'report id is ')
           {reportId ? 'Update the result':'Add result'}
         </button>
       </form>
-      <div  className="max-w-md mx-auto" >
+      <div  className="max-w-md mx-auto flex space-x-3" >
       { reportId ? <AddTestResult reportId={reportId}/>: <h1></h1>}
+      { reportId ? <DoctorViewReport reportId={reportId}/>: <h1></h1>}
       </div>
     </div>
   )

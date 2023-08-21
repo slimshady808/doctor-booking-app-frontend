@@ -12,7 +12,7 @@ export const fetchPendingBooking = async (doctorId) => {
     const token =await getAccess();
     const token1 = getAccessToken(); 
     const headers = {
-      Authorization: `Bearer ${token1}`,
+      Authorization: `Bearer ${token}`,
     };
 
     const response = await axios.get(
@@ -26,6 +26,8 @@ export const fetchPendingBooking = async (doctorId) => {
     return null;
   }
 };
+
+
 export const fetchBookingHistory = async (doctorId)=>{
   try{
     const token= await getAccess();
@@ -34,7 +36,8 @@ export const fetchBookingHistory = async (doctorId)=>{
       Authorization:`Bearer ${token}`,
     };
     const response = await axios.get(`${server}/booking/booking-history/${doctorId}/`,
-    {headers});
+    {headers}
+    );
     return response.data;
 
   }catch(error){
@@ -50,7 +53,7 @@ export const createReport = async(formData)=>{
     console.log(token1)
     const response= await axios.post(`${server}/report/create/`,formData,{
       headers:{
-        Authorization:`Bearer ${token1}`,
+        Authorization:`Bearer ${token}`,
       },
     });
     console.log(response.data)
@@ -66,14 +69,14 @@ export const createReport = async(formData)=>{
 
 export const getReport = async (booking_id)=>{
   try{
-    const token = await getAccess();
-    const token1 = getAccessToken();
-    console.log(token1)
+    const token1 = await getAccess();
+    const token = getAccessToken();
+    // console.log(token1)
     const response = await axios.get(
       `${server}/report/get-report/${booking_id}/`,
       {
         headers :{
-          Authorization : `Bearer ${token}`,
+          Authorization : `Bearer ${token1}`,
         }
       }
     );
@@ -131,12 +134,57 @@ export const createTest = async (testData)=>{
       Authorization: `Bearer ${token}`,
     };
     const response = await axios.post(`${server}/report/test-create/`,testData,{
-      headers,
+      // headers,
     });
     return response.data
   }catch(error){
      console.log('Error creating test:', error);
     return null;
   
+  }
+}
+
+export const fetchTests = async (report_id)=>{
+  try{
+    const token= getAccessToken()
+    const response = await axios.get(`${server}/report/test-list/${report_id}/`,{
+      // headers:{
+      //   Authorization:`Bearer ${token},`
+      // }
+    })
+    return response.data
+  }catch(error){
+    console.log('error fetching test list:',test)
+    return null
+  }
+}
+
+export const deleteTest = async (test_id)=>{
+  try{
+    const response = await axios.delete(`${server}/report/delete/${test_id}/`)
+   
+    console.log(response,'dlt')
+    return response.status
+  }catch(error){
+    toast.error("can't delete this data")
+    return null
+  }
+}
+
+export const fetchReview = async (doctor_id)=>{
+  try{
+    const token = await getAccess()
+    const token1 = getAccessToken()
+    const headers = {
+      Authorization: `Bearer ${token}`,
+    };
+    const response = await axios.get(`${server}/review/review-list/${doctor_id}/`,
+    {headers}
+    );
+    console.log(response,'review coming')
+    return response.data
+  }catch(error){
+    console.log('error on fetching review in doctor side:',error)
+    return null
   }
 }

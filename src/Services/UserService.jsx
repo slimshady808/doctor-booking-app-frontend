@@ -138,7 +138,7 @@ export const fetchReview = async (doctorId)=>{
       Authorization:`Bearer ${token1}`,
     };
     const response = await axios.get (`${server}/review/review-list/${doctorId}/`,
-    {headers}
+    // {headers}
     );
     return response.data
   }catch(error){
@@ -155,7 +155,7 @@ export const createReview = async (formData)=>{
       Authorization :`Bearer ${token}`,
     };
     const response = await axios.post(`${server}/review/create/`,formData,{
-      headers
+      // headers
     })
     return response.data
 
@@ -174,7 +174,7 @@ export const updateReview = async (review_id,formData)=>{
     Authorization : `Bearer ${token}`,
   };
   const response = await axios.put(`${server}/review/update/${review_id}/`,formData,{
-    headers
+    // headers
   })
   return response.data
 }catch(error){

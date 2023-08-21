@@ -11,7 +11,7 @@ const Banner = () => {
     />
     <div className="absolute inset-0  opacity-70"></div>
     <div className="absolute bottom-36 left-36 text-white">
-      <h1 className="text-3xl font-extrabold text-blue-700">Book Appointment</h1>
+      <h1 className="text-3xl font-extrabold text-blue-700">Book Appointment:</h1>
       <p className="mt-4 text-lg font-semibold text-blue-800">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit.
       </p>

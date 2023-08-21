@@ -21,7 +21,7 @@ export const DoctorManagement = () => {
 
   console.log(doctors)
 
-
+  
   return (
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg w-full">
  <Toaster position='top-center' reverseOrder='false' ></Toaster>
@@ -75,7 +75,7 @@ export const DoctorManagement = () => {
           <td class="px-6 py-4">{doctor.fee}</td>
           <td class="px-6 py-4">
           <Link
-                to={`/doctor_edit/${doctor.id}`} // Replace with your desired path
+                to={`/doctor_edit/${doctor.id}`} 
                 
               >
                 <svg className="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 18">

@@ -22,6 +22,8 @@ import { UserBookingPage } from './pages/UserBookingPage';
 import { AddReportPage } from './pages/Doctor/AddReportPage';
 import { AddTestResult } from './components/doctor/AddTestResult';
 import { AddTestResultPage } from './pages/Doctor/AddTestResultPage';
+import DoctorReviewPage from './pages/Doctor/DoctorReviewPage';
+
 function App() {
 
 
@@ -48,6 +50,7 @@ function App() {
     <Route Component={DoctorHistoryPage} path='/doctor/history'/>
     <Route Component={DoctorAddSlotPage} path='/doctor/addSlot'/>
     <Route Component={DoctorReveneuPage} path='/doctor/revenue'/>
+    <Route Component={DoctorReviewPage} path='/doctor/review'/>
     <Route Component={AddReportPage} path='/doctor/addReport/:bookingId/:patientId/:doctorId'/>
     <Route Component={AddTestResultPage} path='/doctor/addTest/:bookingId/:patientId/:doctorId'/>
     

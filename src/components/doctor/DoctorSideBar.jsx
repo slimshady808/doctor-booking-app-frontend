@@ -118,7 +118,7 @@ const history=useNavigate()
                                 />
                             </svg>
                             <span className="text-gray-100">
-                            <Link to="/doctor/revenue">Revenue</Link>
+                            <Link to="/doctor/review">Reviews</Link>
                             </span>
                         </a>
                     </li>

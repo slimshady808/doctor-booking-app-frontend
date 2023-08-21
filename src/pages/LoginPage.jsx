@@ -23,7 +23,7 @@ export const LoginPage = () => {
 
 
 const handleSubmit = async (e) => {
-  console.log('hii')
+ 
   e.preventDefault();
   try{
     const response = await login(e);
