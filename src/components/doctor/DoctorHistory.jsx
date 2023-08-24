@@ -4,6 +4,8 @@ import jwt_decode from 'jwt-decode'
 import {fetchBookingHistory} from '../../Services/DoctorService'
 import { NoPendingBooking } from './NoPendingBooking'
 import { Link } from 'react-router-dom'
+import { BsFillChatRightDotsFill } from 'react-icons/bs';
+
 
 export const DoctorHistory = () => {
   const [doctorId,setDoctorId]=useState('')
@@ -55,7 +57,10 @@ console.log(booking)
               status
             </th>
             <th scope="col" className="px-6 py-3">
-              Medical Report
+              Report
+            </th>
+            <th scope="col" className="px-6 py-3">
+              Messages
             </th>
           </tr>
         </thead>
@@ -72,16 +77,23 @@ console.log(booking)
               <td className="px-6 py-4">{bookingItem.slot_date}</td>
               <td className="px-6 py-4">{bookingItem.slot_time}</td>
               <td className="px-6 py-4"> {bookingItem.patient_name}</td>
-              <td className="px-6 py-4">  {bookingItem.patient_age}</td>
+              <td className="px-6 py-4">  {bookingItem.patient_age}{bookingItem.user_id}</td>
               <td className="px-6 py-4">  {bookingItem.booking_status}</td>
               <td className="px-6 py-4">
                 <a
                   href="#"
                   className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
                 >
-                  <Link to={`/doctor/addReport/${bookingItem.booking_id}/${bookingItem.patient_id}/${doctorId}`}>Report</Link>/
-                  test
+                  <Link to={`/doctor/addReport/${bookingItem.booking_id}/${bookingItem.patient_id}/${doctorId}`}>Report</Link>
+                  
                 </a>
+              </td>
+              <td>
+              
+              
+              <Link to={`/doctor_chat/${bookingItem.user_id}/${doctorId}`}><div className="flex items-center"><BsFillChatRightDotsFill className="text-green-500 ml-9 mr-2" />
+            <span>chat</span> </div></Link>
+       
               </td>
             </tr>
           ))}

@@ -185,4 +185,37 @@ export const updateReview = async (review_id,formData)=>{
 
 }
 
+export const fetch_user_messages = async(userId,doctorId)=>{
+  try{
+    const token = await getAccess()
+    const token1 = getAccessToken()
+    const headers = {
+      Authorization:`Bearer ${token1}`,
+    };
+    const response = await axios.get(`${server}/chat/fetch-messages/${userId}/${doctorId}/`,
+    // {headers}
+    );
+    return response.data
+}catch(error){
+  console.error("error for fetchig messages:",error)
+  return null
+}
+}
 
+
+export const createMessage = async(formData)=>{
+  try{
+    const token= await getAccess();
+    const token1= getAccessToken()
+    const headers = {
+      Authorization :`Bearer ${token}`,
+    };
+    const response = await axios.post(`${server}/chat/user-to-doctor-messages/`,formData,{
+      // headers
+    })
+    return response.data
+  }catch(error){
+    console.error('error creating message:',error)
+    return null
+  }
+}

@@ -188,3 +188,20 @@ export const fetchReview = async (doctor_id)=>{
     return null
   }
 }
+
+export const createMessage = async(formData)=>{
+  try{
+    const token = await getAccess()
+    const token1 = getAccessToken()
+    const headers={
+      Authorization:`Bearer ${token}`,
+    };
+    const response = await axios.post(`${server}/chat/doctor-to-user-messages/`,formData,{
+      // headers
+    })
+    return response.data
+  }catch(error){
+    console.error('error for creating doc messages:',error)
+    return null
+  }
+}

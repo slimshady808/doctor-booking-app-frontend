@@ -50,10 +50,10 @@ const toggleModal = () => {
     }
   }, [isModalOpen]);
   
-  console.log('Outside first useEffect:', userId);
+  // console.log('Outside first useEffect:', userId);
   
   useEffect(() => {
-    console.log('Inside second useEffect - fetching patients');
+    // console.log('Inside second useEffect - fetching patients');
     const fetchData = async () => {
       const data = await fetchPatients(userId);
       if (data) {
