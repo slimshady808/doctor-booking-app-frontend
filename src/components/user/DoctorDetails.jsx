@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import {BookingModal} from '../user/BookingModal'
 import {fetchDoctorData,fetchDepartmentById,fetchQualificationById, fetchAddressById,fetchAvailableDates} from '../../Services/UserService'
 import { BsMenuButton } from 'react-icons/bs';
@@ -248,6 +248,13 @@ useEffect(()=>{
               Book Here
             </button>
           )}
+
+          <Link
+                to={`/user_chat/${doctorId}`} 
+                className="bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            >
+                Start Chat
+            </Link>
         </div>
       </div>
     </div>

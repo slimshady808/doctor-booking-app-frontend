@@ -23,6 +23,7 @@ import { AddReportPage } from './pages/Doctor/AddReportPage';
 import { AddTestResult } from './components/doctor/AddTestResult';
 import { AddTestResultPage } from './pages/Doctor/AddTestResultPage';
 import DoctorReviewPage from './pages/Doctor/DoctorReviewPage';
+import { UserChatPage } from './pages/UserChatPage';
 
 function App() {
 
@@ -42,6 +43,9 @@ function App() {
     <Route Component={DoctorDetailPage} path='/doctor_details/:doctorId'/>
     <Route Component={BookingSuccessPage} path='/success'/>
     <Route Component={UserBookingPage} path='/bookings_list'/>
+    <Route Component={UserChatPage} path='/user_chat/:doctorId'/>
+
+
 
 
     <Route Component={DoctorLogin} path='/doctor_login'/>
