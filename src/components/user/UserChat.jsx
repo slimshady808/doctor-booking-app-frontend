@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {fetch_user_messages} from '../../Services/UserService'
+import {fetch_user_messages,createMessage} from '../../Services/UserService'
 import { getAccessToken } from '../../helpers/auth';
 import jwt_decode from 'jwt-decode';
 import { useParams } from "react-router-dom";
@@ -31,9 +31,9 @@ export const UserChat=()=>{
 
         const newSocket = new WebSocket(`ws://localhost:8000/ws/chat/`);
         setSocket(newSocket);
-        return ()=>{
-            newSocket.close();
-        }
+        // return ()=>{
+        //     newSocket.close();
+        // }
 
     },[doctorId]);
 
@@ -43,14 +43,27 @@ export const UserChat=()=>{
                 console.log("websocket connection opened");
             }
             socket.onmessage=(event)=>{
-                const message = JSON.parse(event.data)
-                setMessages((prevMessages)=>[...prevMessages,message]);
+                const data = JSON.parse(event.data)
+                const message_get=data.message_content
+                console.log(message_get,'return message user')
+                setMessages((prevMessages)=>[...prevMessages,data]);
 
             };
         }
     },[socket])
 
-    const handleSendMessage=()=>{
+
+
+        useEffect(() => {
+        return () => {
+            if (socket) {
+                socket.close();
+            }
+        };
+    }, [socket]);
+    
+
+    const handleSendMessage= async ()=>{
         if (messageInput.trim()==='') return;
 
         try{
@@ -58,12 +71,17 @@ export const UserChat=()=>{
                 sender: userId,
                 receiver: doctorId,
                 message_content: messageInput,
-                sender_type : 'user'
+                
             };
+            const response =await createMessage(newMessage);
+            if (response){
+
             if (socket){
                 socket.send(JSON.stringify(newMessage));
             }
+            //setMessages([...messages,response])
             setMessageInput('')
+        }
         }catch(error){
             console.error('error for sending messages:',error);
         }
