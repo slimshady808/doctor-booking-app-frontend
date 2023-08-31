@@ -1,6 +1,28 @@
 import axios from "axios";
 import {getAccess,getAccessToken} from '../helpers/auth'
 import {server} from '../server'
+
+export const createUser = async (formData)=>{
+  try {
+    const data=await axios.post(`${server}/api/register`,formData)
+    return data
+  }catch(error){
+    console.error("error while creating user",error)
+    return error.response
+  }
+} 
+
+export const otpVarification = async (formData)=>{
+  try{
+    const data= await axios.post(`${server}/api/verify-otp/`,formData)
+    return data.status
+  }catch(error){
+    console.error("error while otp varification",error)
+    return error
+  }
+}
+
+
 export const fetchDoctorData = async (doctorId) => {
   try {
     const response = await axios.get(`http://localhost:8000/doctor/doctor/${doctorId}/`);
@@ -72,7 +94,14 @@ export const fetchPatients = async (userId)=>{
 }
 export const createPatient= async (newPatientDetails)=>{
   try {
-    const response = await axios.post(`${server}/api/create-patient/`, newPatientDetails);
+    const token = await getAccess()
+    const token1 = getAccessToken();
+    const response = await axios.post(`${server}/api/create-patient/`, newPatientDetails,{
+      headers:{
+        Authorization:`Bearer ${token}`,
+
+      },
+    });
     console.log("Patient created successfully:", response.data.id);
     return response.data.id;
   }
@@ -110,16 +139,16 @@ export const fetchSlotData = async (slotid)=>{
 }
 
 
-export const fetchUserBookingHistory= async()=>{
+export const fetchUserBookingHistory= async(user_id)=>{
   try{
     const token1 = await getAccess();
     const token = getAccessToken();
     console.log(token1)
     const headers={
-      Authorization : `Bearer ${token1}`,
+      Authorization : `Bearer ${token}`,
     };
     const response = await axios.get (
-        `${server}/booking/user-booking-history/`,
+        `${server}/booking/user-booking-history/${user_id}/`,
         {headers}
     );
     return response.data
@@ -155,7 +184,7 @@ export const createReview = async (formData)=>{
       Authorization :`Bearer ${token}`,
     };
     const response = await axios.post(`${server}/review/create/`,formData,{
-      // headers
+      headers
     })
     return response.data
 
@@ -174,7 +203,7 @@ export const updateReview = async (review_id,formData)=>{
     Authorization : `Bearer ${token}`,
   };
   const response = await axios.put(`${server}/review/update/${review_id}/`,formData,{
-    // headers
+    headers
   })
   return response.data
 }catch(error){
@@ -192,7 +221,7 @@ export const fetch_user_messages = async(userId,doctorId)=>{
     const headers = {
       Authorization:`Bearer ${token1}`,
     };
-    const response = await axios.get(`${server}/chat/fetch-messages/${userId}/${doctorId}/`,
+    const response = await axios.get(`${server}/chat/chat/${userId}/${doctorId}/`,
     // {headers}
     );
     return response.data
@@ -210,12 +239,28 @@ export const createMessage = async(formData)=>{
     const headers = {
       Authorization :`Bearer ${token}`,
     };
-    const response = await axios.post(`${server}/chat/user-to-doctor-messages/`,formData,{
+    const response = await axios.post(`${server}/chat/create/`,formData,{
       // headers
     })
     return response.data
   }catch(error){
     console.error('error creating message:',error)
+    return null
+  }
+}
+export const userHelthReport= async(booking_id)=>{
+  try{
+    const token= await getAccess();
+    const token1=getAccessToken()
+    const headers={
+      Authorization:`Bearer${token}`,
+    };
+    const response = await axios.get(`${server}/test/health_result/${booking_id}`,{
+      headers
+    })
+    return response.data
+  }catch(error){
+    console.error('error for fetching health report:',error)
     return null
   }
 }

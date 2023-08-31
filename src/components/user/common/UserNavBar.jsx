@@ -76,31 +76,10 @@ export const UserNavBar = () => {
            
             </a>
           </li>
-          {/* <li>
-            <a
-              href="/"
-              class="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
-              aria-label="Sign up"
-              title="Profile"
-            >
-              Profile
-            </a>
-          </li> */}
+
 
           <li class="relative">
-            {/* <a
-              href="/"
-              class="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
-              aria-label="Profile"
-              title="Profile"
-            >
-              Profile
-            </a>
-            <ul class="absolute right-0 hidden mt-2 py-2 bg-white border rounded-lg shadow-md z-10">
-              <li><a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-200">Change Password</a></li>
-              <li><a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-200">History</a></li>
-              <li><a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-200">Edit Profile</a></li>
-            </ul> */}
+         
 
             <ProfileDropDown/>
           </li>

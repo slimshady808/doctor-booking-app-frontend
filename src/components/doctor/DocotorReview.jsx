@@ -16,7 +16,7 @@ export const DocotorReview = () => {
   useEffect(()=>{
     if (doctorId !==''){
       const fetchData = async () => {
-        const data= await fetchReview(4)
+        const data= await fetchReview(doctorId)
         setReviews(data);
       }
       fetchData();

@@ -19,7 +19,7 @@ export const DoctorDetails = () => {
   const [department,setDepartment]=useState('')
   const [availableDate,setAvailableDate]=useState([])
   const [amount,setAmount]=useState('')
-  
+  const[profileId,setProfileId]=useState('')
   
   const [imgUrl, setImgUrl] = useState('');
   
@@ -34,6 +34,7 @@ export const DoctorDetails = () => {
         setDepartmentId(data.doctor_department);
         setQualificationId(data.qualification);
         setAmount(data.fee)
+        setProfileId(data.user_profile_id)
       }
       setLoading(false);
     };
@@ -250,7 +251,7 @@ useEffect(()=>{
           )}
 
           <Link
-                to={`/user_chat/${doctorId}`} 
+                to={`/user_chat/${doctorId}/${profileId}`} 
                 className="bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             >
                 Start Chat

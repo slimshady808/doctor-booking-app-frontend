@@ -41,20 +41,23 @@ const toggleModal = () => {
     if (isModalOpen) {
       const fetchUserData = async () => {
         const token = getAccessToken();
+        // console.log(token)
         const user = jwt_decode(token);
-        console.log('Fetched user:', user);
+        console.log('Fetched user:', user.user_id);
         setUserId(user.user_id);
         setName(user.username)
       };
       fetchUserData();
     }
   }, [isModalOpen]);
-  
+ 
+
   // console.log('Outside first useEffect:', userId);
   
   useEffect(() => {
-    // console.log('Inside second useEffect - fetching patients');
+    console.log('Inside second useEffect - fetching patients');
     const fetchData = async () => {
+
       const data = await fetchPatients(userId);
       if (data) {
         setPatients(data);
@@ -62,7 +65,7 @@ const toggleModal = () => {
       }
     };
     fetchData();
-  }, [userId]);
+  }, [userId,isModalOpen]);
 
  
 
@@ -226,23 +229,25 @@ const handleBookNow = async ()=>{
   }
   if (patientId){
     // use an existing patient
+    console.log('patient selected')
     bookingData.patient_id=patientId
   }else{
     //create a new patient
    try{
     const newPatientData={
-      user:userId,
+      user_profile:userId,
       name:newPatientName,
       mobile_number: newPatientMobile,
       age:newPatientAge,
       place:newPatientPlace,
     };
-    const newPatientId = await createPatient(newPatientData);
+   
+     const newPatientId = await createPatient(newPatientData);
     if (newPatientId){
       console.log('new patient created with id',newPatientId)
       bookingData.patient_id=newPatientId;
     }else{
-      toast.error('error for creating new patient 1')
+      toast.error('please fill all fields in create patient ')
       return
     }
    }catch(error){
@@ -255,8 +260,15 @@ const handleBookNow = async ()=>{
     const bookingId = await createBooking(bookingData)
      
    if (bookingId){
-    // toast.success('booking success',bookingId)
+    //  toast.success('booking success',bookingId)
     console.log('booking created with id ',bookingId)
+    
+    setSelectedDate('')
+    setNewPatientAge('')
+    setNewPatientName('')
+    setNewPatientMobile('')
+    setNewPatientPlace('')
+    setIsModalOpen(false)
     setBooking(bookingId)
     setFees(amount)
     // console.log('booooking',bookingId)

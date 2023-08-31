@@ -52,9 +52,9 @@ export const AllDoctors = () => {
     className='mb-4 px-4 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-500'
     >
      <option value='' >all</option>
-    <option value='2' >PEDIATRICS</option>
+    <option value='3' >PEDIATRICS</option>
     <option value='1'>ENT</option>
-    <option value='3'>CARDIOLOGY</option>
+    <option value='2'>CARDIOLOGY</option>
 
     </select>
 

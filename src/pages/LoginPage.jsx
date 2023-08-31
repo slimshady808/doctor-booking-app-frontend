@@ -5,13 +5,13 @@ import {useEffect} from 'react'
 import jwt_decode from 'jwt-decode'
 import {Toaster} from 'react-hot-toast'
 import {toast} from 'react-hot-toast'
-import {useSelector,useDispatch} from 'react-redux'
-import { updateAuthToken, updateUser } from '../redux/AuthContext';
+// import {useSelector,useDispatch} from 'react-redux'
+// import { updateAuthToken, updateUser } from '../redux/AuthContext';
 
 export const LoginPage = () => {
   const history= useNavigate()
-  const {user,authToken}=useSelector((state)=>state.auth);
-  const dispatch=useDispatch();
+  // const {user,authToken}=useSelector((state)=>state.auth);
+  // const dispatch=useDispatch();
   const response =getLocal();
   
   useEffect(()=>{
@@ -29,9 +29,9 @@ const handleSubmit = async (e) => {
     const response = await login(e);
     const decoded = jwt_decode(response.access);
     console.log('decoded',decoded)
-    dispatch(updateUser(decoded));
+    // dispatch(updateUser(decoded));
     console.log('tkn',response)
-    dispatch(updateAuthToken(response));
+    // dispatch(updateAuthToken(response));
     history('/')
   }catch (error){
     toast.error('Invalid User Credential')
@@ -86,10 +86,10 @@ const handleSubmit = async (e) => {
               </p>
 
             </form>
-            <p className="text-sm font-light text-gray-500 dark:text-gray-400">
+            {/* <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                 are you a doctor? <Link to="/doctor_login" className="font-medium text-primary-600 hover:underline dark:text-primary-500">Log in </Link>
                 
-              </p>
+              </p> */}
           </div>
         </div>
       </div>

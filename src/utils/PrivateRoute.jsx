@@ -5,6 +5,7 @@ import { HomePage } from "../pages/HomePage";
 
 import { LoginPage } from "../pages/LoginPage";
 import { AdminPage } from "../pages/Admin/AdminPage";
+import { DoctorHomepage } from "../pages/Doctor/DoctorHomepage";
 
 
 export const PrivateRoute = ({children,...rest}) => {
@@ -13,13 +14,17 @@ export const PrivateRoute = ({children,...rest}) => {
         if (response){
           const decoded = jwt_decode(response)
 
-          if (decoded.is_admin){
+          if (decoded.role === "admin"){
             console.log('admin',decoded);
             return <AdminPage/>
           }
-          else if (!decoded.is_admin){
+          else if (decoded.role === "user"){
               return <HomePage/>
-          }else{
+          }
+          else if(decoded.role ==="doctor"){
+            return <DoctorHomepage/>
+          }
+          else{
             console.log('no token');
             return <LoginPage/>
           }

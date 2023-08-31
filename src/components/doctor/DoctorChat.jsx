@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import {createMessage}  from '../../Services/DoctorService'
-import { fetch_user_messages } from '../../Services/UserService';
+import {fetch_user_messages,createMessage} from '../../Services/UserService'
+// import {createMessage}  from '../../Services/DoctorService'
+// import { fetch_user_messages } from '../../Services/UserService';
 export const DoctorChat = () => {
     const { userId, doctorId } = useParams();
     const [messages, setMessages] = useState([]);

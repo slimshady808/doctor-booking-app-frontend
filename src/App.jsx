@@ -25,6 +25,8 @@ import { AddTestResultPage } from './pages/Doctor/AddTestResultPage';
 import DoctorReviewPage from './pages/Doctor/DoctorReviewPage';
 import { UserChatPage } from './pages/UserChatPage';
 import { DoctorChatPage } from './pages/Doctor/DoctorChatPage';
+import { OTP } from './components/user/OTP';
+import { UserHelathReportPage } from './pages/UserHelathReportPage';
 
 function App() {
 
@@ -39,12 +41,14 @@ function App() {
     
     <Route Component={SignUp} path='/signup'/>
     <Route Component={LoginPage} path='/login'/>
+    <Route Component={OTP} path='/otp'/>
     <Route Component={DoctorListpage} path='/doctor_list/:departmentId/'/>
     <Route Component={DoctorsFullPage} path='/doctor_full_list'/>
     <Route Component={DoctorDetailPage} path='/doctor_details/:doctorId'/>
     <Route Component={BookingSuccessPage} path='/success'/>
     <Route Component={UserBookingPage} path='/bookings_list'/>
-    <Route Component={UserChatPage} path='/user_chat/:doctorId'/>
+    <Route Component={UserChatPage} path='/user_chat/:doctorId/:profileId'/>
+    <Route Component={UserHelathReportPage} path='/user/health_report/:booking_id'/>
 
 
 

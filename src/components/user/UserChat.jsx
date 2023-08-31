@@ -10,7 +10,7 @@ export const UserChat=()=>{
     const [loading, setLoading] = useState(true);
     const [messageInput, setMessageInput] = useState('');
     const [socket, setSocket] = useState(null);
-    const { doctorId } = useParams();
+    const { doctorId,profileId } = useParams();
 
     useEffect(()=>{
         const fetchData = async ()=>{
@@ -20,7 +20,7 @@ export const UserChat=()=>{
             setUser(user)
 
             if(user){
-                const data = await fetch_user_messages(doctorId,user)
+                const data = await fetch_user_messages(profileId,user)
                 if (data){
                     setMessages(data);
                 }
@@ -36,7 +36,7 @@ export const UserChat=()=>{
         // }
 
     },[doctorId]);
-
+  
     useEffect(()=>{
         if (socket){
             socket.onopen=()=>{
@@ -69,7 +69,7 @@ export const UserChat=()=>{
         try{
             const newMessage={
                 sender: userId,
-                receiver: doctorId,
+                receiver: profileId,
                 message_content: messageInput,
                 
             };
@@ -89,6 +89,7 @@ export const UserChat=()=>{
 
     return (
         <div className="flex flex-col h-screen bg-gray-100">
+        {doctorId}{profileId}{userId}
             <div className="flex-grow overflow-y-auto px-4 py-8">
                 {loading ? (
                     <p>Loading messages...</p>
@@ -97,12 +98,12 @@ export const UserChat=()=>{
                         <div
                             key={index}
                             className={`flex mb-4 ${
-                                message.sender === userId ? 'justify-end' : 'justify-start'
+                                message.sender == userId ? 'justify-end' : 'justify-start'
                             }`}
                         >
                             <div
                                 className={`rounded-lg p-2 max-w-xs ${
-                                    message.sender === doctorId
+                                    message.sender == profileId
                                         ? 'bg-green-500 text-white'
                                         : 'bg-white text-gray-800'
                                 }`}

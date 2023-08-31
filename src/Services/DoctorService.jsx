@@ -12,7 +12,7 @@ export const fetchPendingBooking = async (doctorId) => {
     const token =await getAccess();
     const token1 = getAccessToken(); 
     const headers = {
-      Authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${token1}`,
     };
 
     const response = await axios.get(
@@ -178,7 +178,7 @@ export const fetchReview = async (doctor_id)=>{
     const headers = {
       Authorization: `Bearer ${token}`,
     };
-    const response = await axios.get(`${server}/review/review-list/${doctor_id}/`,
+    const response = await axios.get(`${server}/review/review-list-doc/${doctor_id}/`,
     {headers}
     );
     console.log(response,'review coming')

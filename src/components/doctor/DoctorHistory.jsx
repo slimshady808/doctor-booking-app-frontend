@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom'
 import { BsFillChatRightDotsFill } from 'react-icons/bs';
 
 
+
 export const DoctorHistory = () => {
   const [doctorId,setDoctorId]=useState('')
   const [booking,setBooking]=useState([])
@@ -92,7 +93,9 @@ console.log(booking)
               
               
               <Link to={`/doctor_chat/${bookingItem.user_id}/${doctorId}`}><div className="flex items-center"><BsFillChatRightDotsFill className="text-green-500 ml-9 mr-2" />
-            <span>chat</span> </div></Link>
+            <span>chat
+            
+            </span> </div></Link>
        
               </td>
             </tr>
