@@ -1,7 +1,9 @@
 import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 
+
 export const DoctorSideBar = () => {
+    
 const history=useNavigate()
   const logout = ()=>{
     localStorage.removeItem('authToken')
@@ -41,7 +43,7 @@ const history=useNavigate()
                             </svg>
                             <span className="text-gray-100">
                          
-                            <Link to="/doctor/home">Pending Orders</Link>
+                            <Link to="/doctor/home">Pending Booking</Link>
                             </span>
                         </a>
                     </li>

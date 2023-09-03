@@ -243,7 +243,7 @@ useEffect(()=>{
             <BookingModal doctorId={doctorId} amount={amount} />
           ) : (
             <button
-              className="block text-white bg-blue-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-sky-300"
+              className="block text-white bg-blue-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-sky-300 mb-10"
               type="button"
             >
               Book Here
@@ -252,7 +252,7 @@ useEffect(()=>{
 
           <Link
                 to={`/user_chat/${doctorId}/${profileId}`} 
-                className="bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                className="bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded focus:outline-none focus:shadow-outline "
             >
                 Start Chat
             </Link>

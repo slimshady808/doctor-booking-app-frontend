@@ -8,7 +8,7 @@ import {deleteTest} from '../../Services/DoctorService'
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export const DoctorViewReport = (props) => {
-  const re='http://127.0.0.1:8000/media/test_results/No.Starch.Python.Oct_.2015._O2Rjd9R.pdf'
+  
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [tests,setTests]=useState([])
   const {reportId} =props
@@ -47,7 +47,7 @@ const handleDelete = async  (testId)=>{
       className="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm my-5 px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
       type="button"
     >
-     view results:
+     view results
     </button>
 
     {/* Main modal */}

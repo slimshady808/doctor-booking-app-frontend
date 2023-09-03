@@ -2,6 +2,7 @@ import axios from "axios";
 import {server} from '../server'
 import {getAccess,getAccessToken} from '../helpers/auth'
 import { toast } from "react-hot-toast";
+import { AiFillAliwangwang } from "react-icons/ai";
 
 
 
@@ -203,5 +204,53 @@ export const createMessage = async(formData)=>{
   }catch(error){
     console.error('error for creating doc messages:',error)
     return null
+  }
+}
+
+export const createSlot = async (formData)=>{
+  try{
+    const token=await getAccess()
+    const token1 = getAccessToken()
+    const headers ={
+      Authorization : `Bearer ${token}`,
+    };
+    const response = await axios.post (`${server}/doctor/slot/create/`,formData,{
+      headers
+    })
+    return response.data
+  }catch(error){
+    console.error('error for reating slot',error.response.data)
+    toast.error('already exists')
+    return null
+  }
+}
+
+export const fetchSlots= async (doctor_id)=>{
+  try{
+    const token = await getAccess()
+    const token1= getAccess()
+    const headers={
+      Authorization:`Bearer ${token}`
+    };
+    const response = await axios.get(`${server}/doctor/slot-list/${doctor_id}/`,{
+      headers
+    }) 
+    return response.data
+  }catch(error){
+    console.error('error for fetching slots data',error)
+    return null
+  }
+}
+export const deleteSlot = async (slot_id)=>{
+  try{
+    const token=await getAccess()
+    const token1=getAccessToken()
+    const header={
+      Authorization:`Bearer ${token}`
+    };
+    const response = await axios.delete(`${server}/doctor/slot-delete/${slot_id}/`)
+    return response
+  }catch(error){
+    console.error("error  for deleteing slot",error)
   }
 }

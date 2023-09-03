@@ -60,7 +60,8 @@ export const DoctorChat = () => {
                 
                 
             };
-            const response =await createMessage(newMessage);
+            // const response =await createMessage(newMessage);
+            const response=true
             if (response){
             if(socket){
                 socket.send(JSON.stringify(newMessage));

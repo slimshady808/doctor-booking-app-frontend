@@ -1,18 +1,19 @@
 import React, { useEffect } from 'react'
-import {  useParams } from 'react-router-dom';
-import {userHelthReport} from '../Services/UserService'
+
+
+import { UserHealthReport } from '../components/user/UserHealthReport';
+import { UserNavBar } from '../components/user/common/UserNavBar';
 export const UserHelathReportPage = () => {
-  const {booking_id}=useParams()
-
-  useEffect(()=>{
-    fetchData= async()=>{
-    data= await userHelthReport(booking_id)
-    } 
-  })
 
 
-  console.log('hi',booking_id)
+
+
+
+
   return (
-    <div>UserHelathReportPage{booking_id}</div>
+    <div>
+    <UserNavBar/>
+    <UserHealthReport/>
+    </div>
   )
 }

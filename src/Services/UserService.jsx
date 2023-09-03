@@ -255,7 +255,7 @@ export const userHelthReport= async(booking_id)=>{
     const headers={
       Authorization:`Bearer${token}`,
     };
-    const response = await axios.get(`${server}/test/health_result/${booking_id}`,{
+    const response = await axios.get(`${server}/report/health_result/${booking_id}`,{
       headers
     })
     return response.data

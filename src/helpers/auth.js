@@ -1,4 +1,5 @@
 import { toast} from "react-hot-toast";
+import jwt_decode from 'jwt-decode'
 export default async function login(e){
   let response =await fetch("http://localhost:8000/api/token/",{
     method: 'POST',
@@ -83,6 +84,12 @@ export async function getAccess() {
   }
 
   return null; // Return null if no authToken is found in localStorage
+}
+
+export const get_user_data=()=>{
+  const token=getAccessToken()
+  const decode=jwt_decode(token)
+  return decode
 }
 
 
