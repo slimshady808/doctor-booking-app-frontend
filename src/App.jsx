@@ -27,6 +27,8 @@ import { UserChatPage } from './pages/UserChatPage';
 import { DoctorChatPage } from './pages/Doctor/DoctorChatPage';
 import { OTP } from './components/user/OTP';
 import { UserHelathReportPage } from './pages/UserHelathReportPage';
+import { ResetPasswordPage } from './pages/Doctor/ResetPasswordPage';
+import { ForgotPasswordPage } from './pages/ForgotPasswordPage';
 
 function App() {
 
@@ -42,6 +44,7 @@ function App() {
     <Route Component={SignUp} path='/signup'/>
     <Route Component={LoginPage} path='/login'/>
     <Route Component={OTP} path='/otp'/>
+    <Route Component={ForgotPasswordPage} path='/forgot/password'/>
     <Route Component={DoctorListpage} path='/doctor_list/:departmentId/'/>
     <Route Component={DoctorsFullPage} path='/doctor_full_list'/>
     <Route Component={DoctorDetailPage} path='/doctor_details/:doctorId'/>
@@ -63,6 +66,7 @@ function App() {
     <Route Component={AddReportPage} path='/doctor/addReport/:bookingId/:patientId/:doctorId'/>
     <Route Component={AddTestResultPage} path='/doctor/addTest/:bookingId/:patientId/:doctorId'/>
     <Route Component={DoctorChatPage} path='/doctor_chat/:userId/:doctorId'/>
+    <Route Component={ResetPasswordPage} path='/reset-password' />
 
 
 

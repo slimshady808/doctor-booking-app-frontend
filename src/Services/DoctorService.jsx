@@ -245,12 +245,32 @@ export const deleteSlot = async (slot_id)=>{
   try{
     const token=await getAccess()
     const token1=getAccessToken()
-    const header={
+    const headers={
       Authorization:`Bearer ${token}`
     };
-    const response = await axios.delete(`${server}/doctor/slot-delete/${slot_id}/`)
+    const response = await axios.delete(`${server}/doctor/slot-delete/${slot_id}/`,{
+      headers
+    })
     return response
   }catch(error){
     console.error("error  for deleteing slot",error)
+    return null
+  }
+}
+export const resetPassword = async (formData)=>{
+  try{
+    const token = await getAccess()
+    // const token1=getAccessToken()
+    const headers={
+      Authorization :`Bearer ${token}`
+    };
+    const response = await axios.post (`${server}/api/reset-password/`,formData,{
+      headers
+    })
+    console.log(response)
+    return response.status
+  }catch(error){
+    console.error("error for reset password",error)
+    return null
   }
 }
