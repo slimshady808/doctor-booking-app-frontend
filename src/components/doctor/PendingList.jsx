@@ -38,6 +38,9 @@ const PendingList = () => {
   return (
   
     <div className="relative overflow-x-auto shadow-md sm:rounded-sm w-full">
+     <h1 class="text-4xl font-bold text-blue-600 py-4 px-32 ml-36" >
+    Pending bookings
+     </h1>
        <div className="pr-6 ">
        {booking.length===0 ?(<NoPendingBooking/>):(
         <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400 ">

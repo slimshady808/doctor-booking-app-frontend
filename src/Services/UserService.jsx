@@ -264,3 +264,24 @@ export const userHelthReport= async(booking_id)=>{
     return null
   }
 }
+
+export const forgotPassword = async(formdata)=>{
+  try{
+    const response= await axios.post(`${server}/api/forgot-password/`,formdata)
+    // console.log(response.data,'h')
+    return response.data
+  }catch(error){
+    console.error('error for forgot password',error)
+    return null
+  }
+}
+
+export const resetPassword = async (formData)=>{
+  try{
+    const response = await axios.post(`${server}/api/new-password/`,formData)
+    return response.data
+  }catch(error){
+    console.error('error for forgot password',error)
+    return error
+  }
+}

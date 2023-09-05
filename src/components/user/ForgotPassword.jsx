@@ -1,16 +1,28 @@
 import React, { useState } from "react";
-
+import {forgotPassword} from '../../Services/UserService'
+import {Toaster} from 'react-hot-toast'
+import {toast} from 'react-hot-toast'
 export const ForgotPassword = () => {
   const [email, setEmail] = useState("");
-
-  const handleSubmit = (e) => {
+  // const [new_password,setNewPassword]=useState('')
+  // const [confirmPassword,setConfirmPassword]=useState('')
+  const handleSubmit =async (e) => {
     e.preventDefault();
-    // Handle the submission of the email (e.g., send a reset password link)
-    console.log("Submitted email:", email);
+    const data={
+      email:e.target.email.value
+    }
+    const response= await forgotPassword(data)
+    if (response.status===200){
+      toast.success('please check email')
+    }else{
+      toast.error('no user available for this email')
+    }
+    
   };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-indigo-400 to-blue-600 py-12 px-4 sm:px-6 lg:px-8">
+      <Toaster position='top-center' reverseOrder='false' ></Toaster>
       <div className="max-w-md w-full bg-white p-6 rounded-lg shadow-lg">
         <h2 className="text-3xl font-extrabold text-gray-900 text-center mb-4">
           Forgot Your Password?
@@ -46,7 +58,11 @@ export const ForgotPassword = () => {
         </form>
       </div>
     </div>
+
+
+ 
   );
 };
 
 
+  

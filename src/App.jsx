@@ -29,6 +29,9 @@ import { OTP } from './components/user/OTP';
 import { UserHelathReportPage } from './pages/UserHelathReportPage';
 import { ResetPasswordPage } from './pages/Doctor/ResetPasswordPage';
 import { ForgotPasswordPage } from './pages/ForgotPasswordPage';
+import { ResetPasswordNew } from './components/user/ResetPasswordNew';
+
+
 
 function App() {
 
@@ -45,6 +48,7 @@ function App() {
     <Route Component={LoginPage} path='/login'/>
     <Route Component={OTP} path='/otp'/>
     <Route Component={ForgotPasswordPage} path='/forgot/password'/>
+    <Route Component={ResetPasswordNew} path="/reset-password/:uidb64/:token/" />
     <Route Component={DoctorListpage} path='/doctor_list/:departmentId/'/>
     <Route Component={DoctorsFullPage} path='/doctor_full_list'/>
     <Route Component={DoctorDetailPage} path='/doctor_details/:doctorId'/>
