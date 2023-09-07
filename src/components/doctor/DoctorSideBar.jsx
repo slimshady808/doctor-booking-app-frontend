@@ -43,7 +43,7 @@ const history=useNavigate()
                             </svg>
                             <span className="text-gray-100">
                          
-                            <Link to="/doctor/home">Pending Booking</Link>
+                            <Link to="/">Pending Booking</Link>
                             </span>
                         </a>
                     </li>

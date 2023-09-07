@@ -135,7 +135,7 @@ const handlePaymentSuccess = async (response)=>{
     })
     .then((res)=>{
       console.log("everything is OK")
-      const successUrl = `/success?slotid=${encodeURIComponent(slotid)}`;
+      const successUrl = `/user/success?slotid=${encodeURIComponent(slotid)}`;
       navigate(successUrl);
       // navigate('/success/')
       setBooking("")

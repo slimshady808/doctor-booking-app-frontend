@@ -60,8 +60,8 @@ export const DoctorChat = () => {
                 
                 
             };
-            // const response =await createMessage(newMessage);
-            const response=true
+            const response =await createMessage(newMessage);
+           
             if (response){
             if(socket){
                 socket.send(JSON.stringify(newMessage));
@@ -75,6 +75,7 @@ export const DoctorChat = () => {
     }
   return (
     <div className="flex flex-col h-screen bg-gray-100">
+    {userId} {doctorId}
     <div className="flex-grow overflow-y-auto px-4 py-8">
         {loading ? (
             <p>Loading messages...</p>

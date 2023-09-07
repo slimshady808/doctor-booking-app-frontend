@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import login, { getLocal } from '../helpers/auth';
+import login, { getAccessToken, getLocal } from '../helpers/auth';
 import {Link,useNavigate} from 'react-router-dom'
 import {useEffect} from 'react'
 import jwt_decode from 'jwt-decode'
@@ -14,7 +14,7 @@ export const LoginPage = () => {
 
   // const {user,authToken}=useSelector((state)=>state.auth);
   // const dispatch=useDispatch();
-  const response =getLocal();
+  const response =getAccessToken();
   
   useEffect(()=>{
     if (response){

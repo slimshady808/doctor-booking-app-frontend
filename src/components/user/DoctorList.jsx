@@ -1,19 +1,33 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { useParams, Link } from 'react-router-dom';
-
+import { getAccessToken, getLocal } from '../../helpers/auth';
+import {fetchDoctorByDepartment} from '../../Services/UserService'
+import { server } from '../../server';
 export const DoctorList = () => {
   const { departmentId } = useParams();
     const [doctors,setDoctors]=useState([])
-    useEffect(()=>{
-      async function getDoctors(){
-        const response = await axios.get(`http://localhost:8000/doctor/doctors_by_department/${departmentId}/`)
-        setDoctors(response.data)
-      }
-      getDoctors()
-    },[departmentId])
 
-    console.log(doctors)
+
+    // useEffect(()=>{
+    //   async function getDoctors(){
+    //     const response = await axios.get(`http://localhost:8000/doctor/doctors_by_department/${departmentId}/`)
+    //     setDoctors(response.data)
+    //   }
+    //   getDoctors()
+    // },[departmentId])
+
+    useEffect(()=>{
+      const fetchData = async ()=>{
+        const response = await fetchDoctorByDepartment(departmentId)
+        if (response){
+          setDoctors(response)
+        }
+      }
+      fetchData()
+    },[])
+
+    
 
 
   return (
@@ -30,7 +44,7 @@ export const DoctorList = () => {
     
       <div className="grid gap-10 mx-auto sm:grid-cols-2 lg:grid-cols-4 lg:max-w-screen-lg">
       {doctors.map((doctor) => {
-               const imageUrl = `http://localhost:8000${doctor.doctor_image}`;
+               const imageUrl = `${server}${doctor.doctor_image}`;
                return (
 
                 <div key={doctor.id} className="bg-white rounded shadow">
@@ -49,7 +63,7 @@ export const DoctorList = () => {
            
           </div>
           <Link
-              to={`/doctor_details/${doctor.id}`} // Replace with your desired path
+              to={`/user/doctor/details/${doctor.id}`} // Replace with your desired path
               className="inline-block px-6 py-2 mt-6 ml-16 mb-6 text-sm font-medium text-white bg-blue-500 rounded-lg hover:bg-blue-600"
             >
               See more

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams,useLocation } from 'react-router-dom';
-import {fetchSlotData} from '../Services/UserService'
+import {fetchSlotData} from '../../Services/UserService'
 export const BookingSucces = () => {
   
   const navigate =useNavigate()

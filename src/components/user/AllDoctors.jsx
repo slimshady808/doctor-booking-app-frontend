@@ -95,7 +95,7 @@ export const AllDoctors = () => {
          
         </div>
         <Link
-              to={`/doctor_details/${doctor.id}`} // Replace with your desired path
+              to={`/user/doctor/details/${doctor.id}`} // Replace with your desired path
               className="inline-block px-6 py-2 mt-6 ml-16 mb-6 text-sm font-medium text-white bg-blue-500 rounded-lg hover:bg-blue-600"
             >
               Book Now

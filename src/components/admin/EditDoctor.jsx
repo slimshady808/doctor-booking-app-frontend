@@ -14,7 +14,7 @@ export const EditDoctor = () => {
   const[addressId,setAddress]=useState('')
   const [doctorFormData, setDoctorFormData] = useState({
     doctor_name: '',
-    email: '',
+    // email: '',
     phone: '',
     fee: '',
     more_details: '',
@@ -41,7 +41,7 @@ export const EditDoctor = () => {
   useEffect(() => {
     setDoctorFormData({
       doctor_name: doctor.doctor_name || '',
-      email: doctor.email || '',
+      // email: doctor.email || '',
       phone: doctor.phone || '',
       fee: doctor.fee || '',
       more_details: doctor.more_details || '',
@@ -70,7 +70,7 @@ export const EditDoctor = () => {
     e.preventDefault();
     const formPayload = new FormData();
     formPayload.append('doctor_name', doctorFormData.doctor_name);
-    formPayload.append('email', doctorFormData.email);
+    // formPayload.append('email', doctorFormData.email);
     formPayload.append('phone', doctorFormData.phone);
     formPayload.append('fee', doctorFormData.fee);
     formPayload.append('more_details', doctorFormData.more_details);
@@ -117,7 +117,7 @@ export const EditDoctor = () => {
                 required
               />
             </div>
-            <div>
+            {/* <div>
               <label className="block mb-2 text-gray-600" htmlFor="email">
                 Email
               </label>
@@ -130,7 +130,7 @@ export const EditDoctor = () => {
                 className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-500"
                 required
               />
-            </div>
+            </div> */}
             <div>
               <label className="block mb-2 text-gray-600" htmlFor="phone">
                 Phone

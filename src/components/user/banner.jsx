@@ -17,7 +17,7 @@ const Banner = () => {
       </p>
       <button className="mt-6 px-8 py-3 text-white font-semibold bg-blue-600 hover:bg-blue-700 rounded-md shadow-md">
         
-        <Link to="/doctor_full_list" className="font-medium text-primary-600 hover:underline dark:text-primary-500">Book Appointment</Link>
+        <Link to="/user/doctor/full/list" className="font-medium text-primary-600 hover:underline dark:text-primary-500">Book Appointment</Link>
       </button>
     </div>
   </div>

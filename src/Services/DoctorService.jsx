@@ -274,3 +274,19 @@ export const resetPassword = async (formData)=>{
     return null
   }
 }
+export const fetchDoctorDetails= async(doctor_id)=>{
+  try{
+    const token= await getAccess()
+    const token1= getAccessToken()
+    const headers={
+      Authorization :`Bearer${token}`
+    }
+    const response = await axios.get(`${server}/doctor/get-doctor-profile/${doctor_id}/`,{
+      headers
+    })
+    return response.data
+  }catch(error){
+    console.error('error for fetching doctor data',error)
+    return null
+  }
+}

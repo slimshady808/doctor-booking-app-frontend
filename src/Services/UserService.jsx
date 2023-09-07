@@ -285,3 +285,23 @@ export const resetPassword = async (formData)=>{
     return error
   }
 }
+
+export const  fetchDepartments = async ()=>{
+  try{
+    const response = await axios.get(`${server}/doctor/departments/`)
+    return response.data
+  }catch(error){
+    console.error('error fetching departments',error)
+    return null
+  }
+}
+
+export const fetchDoctorByDepartment = async (departmentId)=>{
+  try{
+    const response = await axios.get(`${server}/doctor/doctors_by_department/${departmentId}/`)
+    return response.data
+  }catch(error){
+    console.error('error for fetching doctors bu department',error)
+    return null
+  }
+}

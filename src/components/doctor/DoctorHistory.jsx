@@ -95,7 +95,7 @@ console.log(booking)
               <td>
               
               
-              <Link to={`/doctor_chat/${bookingItem.user_id}/${doctorId}`}><div className="flex items-center"><BsFillChatRightDotsFill className="text-green-500 ml-9 mr-2" />
+              <Link to={`/doctor/chat/${bookingItem.user_id}/${doctorId}`}><div className="flex items-center"><BsFillChatRightDotsFill className="text-green-500 ml-9 mr-2" />
             <span>chat
             
             </span> </div></Link>

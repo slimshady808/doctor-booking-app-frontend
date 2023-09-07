@@ -1,20 +1,36 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios'
 import { Link } from 'react-router-dom';
-
+import {fetchDepartments} from '../../Services/UserService'
+import { server } from '../../server';
 export const Department = () => {
     const [depertmentList,setDepartmentList]= useState([])
 
 
-    useEffect(()=>{
-      async function getDepartments(){
-        const response =await axios.get('http://localhost:8000/doctor/departments/')
-        console.log(response.data)
-        setDepartmentList(response.data)
+    // useEffect(()=>{
+    //   async function getDepartments(){
+    //     const response =await axios.get('http://localhost:8000/doctor/departments/')
+    //     console.log(response.data)
+    //     setDepartmentList(response.data)
         
+    //   }
+    //   getDepartments();
+    // },[])
+
+    useEffect(()=>{
+      const fetchData= async()=>{
+        const response=await fetchDepartments()
+        if (response){
+          setDepartmentList(response)
+        }
       }
-      getDepartments();
+      fetchData()
+
     },[])
+
+
+
+
   return (
    <div className="container">
    
@@ -22,7 +38,7 @@ export const Department = () => {
           <div className="grid gap-8 lg:grid-cols-3 sm:max-w-sm sm:mx-auto lg:max-w-full">
 
             {depertmentList.map((department)=>{
-              const imageUrl = `http://localhost:8000${department.picture}`;
+              const imageUrl = `${server}${department.picture}`;
 
 
               return(
@@ -58,7 +74,7 @@ export const Department = () => {
                 </p>
                 <p>{department.id}</p>
                 <p className="inline-flex items-center font-semibold transition-colors duration-200 text-deep-purple-accent-400 hover:text-deep-purple-800"
-                >  <Link to={`/doctor_list/${department.id}`} className="font-medium text-primary-600 hover:underline dark:text-primary-500">book now </Link>
+                >  <Link to={`/user/doctor/list/${department.id}`} className="font-medium text-primary-600 hover:underline dark:text-primary-500">book now </Link>
 
                 </p>
               </div>

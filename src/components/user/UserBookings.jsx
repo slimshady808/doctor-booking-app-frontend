@@ -5,11 +5,12 @@ import { AiFillFileAdd } from "react-icons/ai";
 import jwt_decode from 'jwt-decode'
 import {fetchUserBookingHistory} from '../../Services/UserService'
 import { Link } from 'react-router-dom';
+import { server } from '../../server';
 
 export const UserBookings = () => {
   const [bookings,setBookings]=useState([])
   const [userId,setUserId]=useState('')
-
+  const [nextPage, setNextPage] = useState(null);
 
   
     useEffect(() => {
@@ -21,14 +22,16 @@ export const UserBookings = () => {
   
         setUserId(fetchedUserId);
   
-        const data = await fetchUserBookingHistory(fetchedUserId);
+        const data = await fetchUserBookingHistory(fetchedUserId, nextPage);
         if (data) {
-          setBookings(data.user_bookings);
+          // setBookings(data.user_bookings);
+          setBookings([...bookings, ...data.user_bookings]);
+          setNextPage(data.next); 
         }
       };
   
       fetchData();
-    }, []); // Empty dependency array, so this runs only once on mount
+    }, [nextPage]); // Empty dependency array, so this runs only once on mount
   
     console.log(userId, 'userId');
     console.log(bookings, 'bookings');
@@ -49,7 +52,7 @@ export const UserBookings = () => {
 
       {bookings.map((booking) => {
   
-  const imageUrl = `http://localhost:8000/media/${booking.doctor_image}`;
+  const imageUrl = `${server}/media/${booking.doctor_image}`;
 
   return (
 
@@ -66,7 +69,7 @@ export const UserBookings = () => {
                {booking.slot_date},{booking.slot_time}
               </p>
               <p className="text-gray-600">Token:{booking.booking_id}</p>
-              <p className="text-gray-600">Patient:{booking.patient_nam}</p>
+              <p className="text-gray-600">Patient:{booking.patient_name}</p>
             </div>
           </div>
      
@@ -85,6 +88,7 @@ export const UserBookings = () => {
           :''}</p>
           
           </div>
+          
           
         </div>
     

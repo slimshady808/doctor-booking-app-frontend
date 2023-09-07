@@ -21,6 +21,7 @@ export const DoctorDetails = () => {
   const [amount,setAmount]=useState('')
   const[profileId,setProfileId]=useState('')
   
+  
   const [imgUrl, setImgUrl] = useState('');
   
   useEffect(() => {
@@ -28,19 +29,20 @@ export const DoctorDetails = () => {
       setLoading(true);
       const data = await fetchDoctorData(doctorId);
       if (data) {
+     
         setDoctor(data);
         setAddressId(data.address);
         setImgUrl(data.doctor_image);
         setDepartmentId(data.doctor_department);
         setQualificationId(data.qualification);
         setAmount(data.fee)
-        setProfileId(data.user_profile_id)
+        setProfileId(data.user_profile)
       }
       setLoading(false);
     };
     fetchData();
   }, []);  
-// console.log(doctor,'doc')
+
 useEffect(()=>{
   const fetchData = async ()=>{
     const data = await fetchDepartmentById(departmentId);
@@ -94,96 +96,6 @@ useEffect(()=>{
 
 
   return (
-//     <section className="text-gray-700 body-font overflow-hidden ">
-//     <div className="container px-5 py-24 mx-auto ">
-//       <div className="lg:w-4/5  mx-auto flex flex-wrap  ">
-//         <img
-//           alt="ecommerce"
-//           className="lg:w-2/6 h-3/4 object-cover object-center rounded border border-gray-200"
-//           src={imgUrl}
-//         />
-//         <div className="lg:w-4/6 h-25 lg:pl-10 lg:py-6 mt-6 lg:mt-0 ">
-      
-//         <h1 className="text-gray-900 text-3xl title-font font-medium  capitalize mb-1">{doctor.doctor_name}</h1>
-//           <h2 className="text-xl title-font text-gray-500 tracking-widest ">{department}</h2>
-          
-          
-//           {/* <p className="leading-relaxed">Fam locavore kickstarter distillery. Mixtape chillwave tumeric sriracha taximy chia microdosing tilde DIY. XOXO fam indxgo juiceramps cornhole raw denim forage brooklyn. Everyday carry +1 seitan poutine tumeric. Gastropub blue bottle austin listicle pour-over, neutra jean shorts keytar banjo tattooed umami cardigan.</p> */}
-         
-          
-
-//           <div className="  mt-6 items-center pb-5 border-b-2 border-gray-200 mb-5  shadow-md p-6">
-
-//   <div className="text-black ">
-//     <p className="font-bold">Qualification:</p>
-//     <p>{qualification}</p>
-//     <p className="font-bold">Fees:</p>
-//     <p>${amount}</p>
-//     <p className="font-bold">Email:</p>
-//     <p>{doctor.email}</p>
-//     <p className="font-bold">Mobile Number:</p>
-//     <p>{doctor.phone}</p>
-//   </div>
- 
- 
-// </div>
-//  <div>
-  
-//  { availableDate.length>0?(<h1 className='not-italic font-bold text-lg'>Appointments Available</h1>):<h1 className='text-red-500'></h1>}
-//  <div className='shadow-box flex' >
-//  {availableDate && availableDate.length > 0 ? (
-//         <div className='flex  ml-1'>
-//           {availableDate.map((date, index) => (
-//             <div key={index} className="px-2 py-1 bg-gray-200 rounded-md ml-1 mr-1">
-//               {date}
-             
-//             </div>
-
-//           ))}
-          
-//           </div>
-      
-       
-//       ) : (
-//         <div className="bg-red-100 border border-red-400 text-red-700 px-4 p-3 rounded-md ">
-//           <p>Dates not available</p>
-//         </div>
-//       )}
-      
-//  </div>
-//  { availableDate.length>0?( <BookingModal doctorId={doctorId} amount={amount}/>): <button
-//     className="block  text-white bg-blue-700    font-medium rounded-lg text-sm my-5 px-5 py-2.5 text-center dark:bg-sky-300 "
-//       type="button"
-//     >
-//      Book Here
-//     </button>}
-
-
-                
-//   </div>
-
-
- 
-//   </div>
-
-// <div className=' lg:w-2/6  rounded-lg shadow-md p-6  -mt-48'>
-
-//   <div className='text-black  mt-1'>
-//     <p><span className="font-bold">State:</span> {address.state}</p>
-//     <p><span className="font-bold">District:</span> {address.district}</p>
-//     <p><span className="font-bold">Street:</span> {address.street}</p>
-//     <p><span className="font-bold">Building:</span> {address.building}</p>
-//     <p><span className="font-bold">Room:</span> {address.room}</p>
-//   </div>
-// </div>
-
-      
-//       </div>
-      
-//     </div>
-   
-//   </section>
-
 <section className="text-gray-700 body-font overflow-hidden bg-white">
   <div className="container px-5 py-12 mx-auto ">
     <div className="lg:flex lg:flex-wrap -mx-4">
@@ -251,11 +163,16 @@ useEffect(()=>{
           )}
 
           <Link
-                to={`/user_chat/${doctorId}/${profileId}`} 
+               
+                to={`/user/chat/${doctorId}/${profileId}`} 
                 className="bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded focus:outline-none focus:shadow-outline "
             >
-                Start Chat
+                Start Chat 
             </Link>
+
+            <h1
+            onClick={()=>console.log(doctorId,profileId)}
+            >come</h1>
         </div>
       </div>
     </div>

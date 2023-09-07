@@ -89,7 +89,7 @@ export const UserChat=()=>{
 
     return (
         <div className="flex flex-col h-screen bg-gray-100">
-        {doctorId}{profileId}{userId}
+       dc: {doctorId}prof:{profileId}
             <div className="flex-grow overflow-y-auto px-4 py-8">
                 {loading ? (
                     <p>Loading messages...</p>

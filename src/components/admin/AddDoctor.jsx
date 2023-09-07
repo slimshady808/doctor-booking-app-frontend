@@ -8,7 +8,7 @@ export const AddDoctor = () => {
     doctor_name :'',
     doctor_image:null,
     email:'',
-    password:'',
+    username:'',
     doctor_department:'',
     qualification:'',
     phone:'',
@@ -97,26 +97,27 @@ const handleSubmit = async (e) =>{
     const addressResponse = await axios.post("http://localhost:8000/doctor/address_create/",addressData);
 
     const addressId=addressResponse.data.id;
-
+    console.log(addressData)
+    console.log('address created',addressId)
     const formData= new FormData();
     formData.append('doctor_name',doctorData.doctor_name)
     formData.append('doctor_image', doctorData.doctor_image);
     formData.append('email', doctorData.email);
-    formData.append('password', doctorData.password);
+    formData.append('username', doctorData.doctor_name);
     formData.append('doctor_department', doctorData.department);
     formData.append('qualification', doctorData.qualification);
     formData.append('phone', doctorData.phone);
     formData.append('fee', doctorData.fee);
     formData.append('more_details', doctorData.more_details);
     formData.append('address',addressId);
-
+    console.log(formData,'full data')
     const response = await axios.post('http://localhost:8000/doctor/register/',formData,{
       headers:{
         'Content-Type':'multipart/form-data',
       },
     });
     console.log(response.data)
-    navigate('/doctor_management')
+    navigate('/admin/doctor_management')
   }catch(error){
     console.error(error)
   }
@@ -166,7 +167,7 @@ const handleSubmit = async (e) =>{
         />
       </div>
 
-      <div className="flex items-center space-x-4">
+      {/* <div className="flex items-center space-x-4">
         <label className="text-gray-600">Password:</label>
         <input
           type="password"
@@ -176,7 +177,7 @@ const handleSubmit = async (e) =>{
           className="form-input block w-full px-4 py-2 rounded-lg border focus:outline-none focus:border-indigo-500"
           required
         />
-      </div>
+      </div> */}
 
       {/* Department dropdown */}
       <div className="flex items-center space-x-4">

@@ -1,38 +1,20 @@
 import { useState } from 'react'
-import { HomePage } from './pages/HomePage';
-import { DoctorListpage } from './pages/DoctorListpage';
-import {LoginPage} from './pages/LoginPage'
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
-import {SignUp} from './pages/SignUp'
+import { HomePage } from './pages/User/HomePage';
 
-import { PrivateRoute } from './utils/PrivateRoute';
-import { DoctorLogin } from './pages/Doctor/DoctorLogin';
-import { DoctorHomepage } from './pages/Doctor/DoctorHomepage';
-import { DoctorsFullPage } from './pages/DoctorsFullPage';
-import { DoctorManagementPage } from './pages/Admin/DoctorManagementPage';
-import { DoctorEditPage } from './pages/Admin/DoctorEditPage';
-import { EditAddress } from './components/admin/EditAddress';
-import { AddDoctorPage } from './pages/Admin/AddDoctorPage';
-import { DoctorDetailPage } from './pages/DoctorDetailPage';
-import { BookingSuccessPage } from './pages/BookingSuccessPage';
-import { DoctorHistoryPage } from './pages/Doctor/DoctorHistoryPage';
-import { DoctorAddSlotPage } from './pages/Doctor/DoctorAddSlotPage';
-import { DoctorReveneuPage } from './pages/Doctor/DoctorReveneuPage';
-import { UserBookingPage } from './pages/UserBookingPage';
-import { AddReportPage } from './pages/Doctor/AddReportPage';
-import { AddTestResult } from './components/doctor/AddTestResult';
-import { AddTestResultPage } from './pages/Doctor/AddTestResultPage';
-import DoctorReviewPage from './pages/Doctor/DoctorReviewPage';
-import { UserChatPage } from './pages/UserChatPage';
-import { DoctorChatPage } from './pages/Doctor/DoctorChatPage';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+
+
+import {SignUp} from './pages/SignUp'
+import {LoginPage} from './pages/LoginPage'
 import { OTP } from './components/user/OTP';
-import { UserHelathReportPage } from './pages/UserHelathReportPage';
 import { ResetPasswordPage } from './pages/Doctor/ResetPasswordPage';
 import { ForgotPasswordPage } from './pages/ForgotPasswordPage';
 import { ResetPasswordNew } from './components/user/ResetPasswordNew';
 
-
-
+import {AdminRoutes} from './Routes/AdminRoutes'
+import { PrivateRoute } from './utils/PrivateRoute';
+import { DoctorRoutes } from './Routes/DoctorRoutes';
+import { UserRoutes } from './Routes/UserRoutes';
 function App() {
 
 
@@ -49,36 +31,12 @@ function App() {
     <Route Component={OTP} path='/otp'/>
     <Route Component={ForgotPasswordPage} path='/forgot/password'/>
     <Route Component={ResetPasswordNew} path="/reset-password/:uidb64/:token/" />
-    <Route Component={DoctorListpage} path='/doctor_list/:departmentId/'/>
-    <Route Component={DoctorsFullPage} path='/doctor_full_list'/>
-    <Route Component={DoctorDetailPage} path='/doctor_details/:doctorId'/>
-    <Route Component={BookingSuccessPage} path='/success'/>
-    <Route Component={UserBookingPage} path='/bookings_list'/>
-    <Route Component={UserChatPage} path='/user_chat/:doctorId/:profileId'/>
-    <Route Component={UserHelathReportPage} path='/user/health_report/:booking_id'/>
-
-
-
-
-    <Route Component={DoctorLogin} path='/doctor_login'/>
-    <Route Component={DoctorHomepage} path='/doctor/home'/>
-    {/* <Route Component={DoctorHomepage} path='/doctor_home'/> */}
-    <Route Component={DoctorHistoryPage} path='/doctor/history'/>
-    <Route Component={DoctorAddSlotPage} path='/doctor/addSlot'/>
-    <Route Component={DoctorReveneuPage} path='/doctor/revenue'/>
-    <Route Component={DoctorReviewPage} path='/doctor/review'/>
-    <Route Component={AddReportPage} path='/doctor/addReport/:bookingId/:patientId/:doctorId'/>
-    <Route Component={AddTestResultPage} path='/doctor/addTest/:bookingId/:patientId/:doctorId'/>
-    <Route Component={DoctorChatPage} path='/doctor_chat/:userId/:doctorId'/>
     <Route Component={ResetPasswordPage} path='/reset-password' />
 
-
-
-    
-    <Route Component={DoctorManagementPage} path='/doctor_management'/>
-    <Route Component={DoctorEditPage} path='/doctor_edit/:doctorId'/>
-
-    <Route Component={AddDoctorPage} path='/add_doctor'/>
+    <Route path="/admin/*" element={ <AdminRoutes /> } />
+    <Route path="/doctor/*" element={<DoctorRoutes/>} />
+    <Route path="/user/*" element={<UserRoutes/>} />
+ 
 
    
 
