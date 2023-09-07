@@ -1,23 +1,18 @@
-import axios from 'axios'
+
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import {Toaster} from 'react-hot-toast'
 import {toast} from 'react-hot-toast'
 import { BsPersonFillAdd } from 'react-icons/bs';
 import {fetchDoctors} from '../../Services/AdminService'
+import { BlockModal } from '../doctor/BlockModal';
 
 
 export const DoctorManagement = () => {
 
   const [doctors,setDoctors]=useState([])
 
-  // useEffect(()=>{
-  //   async function getDoctors(){
-  //     const response = await axios.get ("http://localhost:8000/doctor/list")
-  //     setDoctors(response.data)
-  //   }
-  //   getDoctors()
-  // },[])
+
 
   useEffect(()=>{
    const fetchData= async()=>{
@@ -28,10 +23,12 @@ export const DoctorManagement = () => {
    }
    fetchData()
 
-  })
+  },[])
 
 
-  // console.log(doctors)
+const handleBlockClick =(id)=>{
+  console.log(id)
+}
 
   
   return (
@@ -96,9 +93,9 @@ export const DoctorManagement = () => {
                         </Link>
                     </td>
                     <td class="px-6 py-4">
-                      <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
-                      close
-                      </a>
+                    
+
+                      <BlockModal user_id={doctor.user_profile} is_active={doctor.user_active}/>
                     </td>
                   </tr>
 

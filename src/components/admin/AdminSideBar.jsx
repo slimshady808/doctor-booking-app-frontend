@@ -71,13 +71,13 @@ export default function AdminSideBar() {
                                         />
                                     </svg>
                                     <span className="text-gray-100">
-                                    <Link to="/">Home</Link></span>
+                                    <Link to="/">Doctors</Link></span>
                                     
                                 </a>
                             </li>
-                            <li className="rounded-sm">
+                            {/* <li className="rounded-sm">
                                 <a
-                                    href="#"
+         
                                     className="flex items-center p-2 space-x-3 rounded-md"
                                 >
                                     <svg
@@ -95,15 +95,15 @@ export default function AdminSideBar() {
                                         />
                                     </svg>
                                     <span className="text-gray-100">
-                                    <Link to="/admin/doctor_management">Doctors</Link>
+                                    <Link to="/admin/doctor_management">Doctor</Link>
                               
 
                                     </span>
                                 </a>
-                            </li>
+                            </li> */}
                             <li className="rounded-sm">
                                 <a
-                                    href="#"
+                     
                                     className="flex items-center p-2 space-x-3 rounded-md"
                                 >
                                     <svg
@@ -120,12 +120,14 @@ export default function AdminSideBar() {
                                             d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
                                         />
                                     </svg>
-                                    <span className="text-gray-100">Users</span>
+                                    <span className="text-gray-100">
+                                    <Link to='/admin/user/list'>Users</Link>
+                                    </span>
                                 </a>
                             </li>
                             <li className="rounded-sm">
                                 <a
-                                    href="#"
+                                
                                     className="flex items-center p-2 space-x-3 rounded-md"
                                 >
                                     <svg
@@ -147,7 +149,9 @@ export default function AdminSideBar() {
                                             d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
                                         />
                                     </svg>
-                                    <span className="text-gray-100">Bookings</span>
+                                    <span className="text-gray-100">
+                                    <Link to="/admin/all_booking">Booking</Link>
+                                    </span>
                                 </a>
                             </li>
                             <li className="rounded-sm">
