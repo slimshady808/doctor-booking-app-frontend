@@ -1,7 +1,8 @@
 import { toast} from "react-hot-toast";
 import jwt_decode from 'jwt-decode'
+import {server} from '../server'
 export default async function login(e){
-  let response =await fetch("http://localhost:8000/api/token/",{
+  let response =await fetch(`${server}/api/token/`,{
     method: 'POST',
     headers:{
       'Content-Type':'application/json',
