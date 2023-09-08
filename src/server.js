@@ -1,1 +1,1 @@
-export const server ="http://51.20.3.40";
+export const server ="https://doctor.gadgetgallery.online";
