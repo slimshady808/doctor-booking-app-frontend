@@ -4,7 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import {Toaster} from 'react-hot-toast'
 import {toast} from 'react-hot-toast'
 import { EditAddress } from './EditAddress';
-
+import {server} from '../../server'
 
 export const EditDoctor = () => {
   const { doctorId } = useParams();
@@ -25,7 +25,7 @@ export const EditDoctor = () => {
   useEffect(() => {
     const fetchDoctorData = async () => {
       try {
-        const response = await axios.get(`http://localhost:8000/doctor/doctor/${doctorId}/`);
+        const response = await axios.get(`${server}/doctor/doctor/${doctorId}/`);
         setDoctor(response.data);
         setLoading(false);
         setImgUrl(response.data.doctor_image)
@@ -79,7 +79,7 @@ export const EditDoctor = () => {
     }
 
     try {
-      await axios.patch(`http://localhost:8000/doctor/doctor/${doctorId}/`, formPayload, {
+      await axios.patch(`${server}/doctor/doctor/${doctorId}/`, formPayload, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },

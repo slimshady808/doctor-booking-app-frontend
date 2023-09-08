@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { toast } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import {fetchAddressById} from '../../Services/UserService'
-
+import {server} from '../../server'
 
 export const EditAddress = (props) => {
 const navigate=useNavigate()
@@ -72,7 +72,7 @@ const handleAddressSubmit = async(e)=>{
   formPayload.append('room',addressFormData.room);
 
   try{
-    await axios.patch(`http://localhost:8000/doctor/address_edit/${addressId}/`,formPayload,{
+    await axios.patch(`${server}/doctor/address_edit/${addressId}/`,formPayload,{
       headers :{
         'Content-Type':'application/x-www-form-urlencoded',
       }

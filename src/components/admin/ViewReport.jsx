@@ -4,7 +4,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { userHelthReport } from '../../Services/UserService';
-
+import {server} from  '../../server'
 export const ViewReport = () => {
   const [reportData, setReportData] = useState([]);
   const { booking_id } = useParams();
@@ -79,7 +79,7 @@ export const ViewReport = () => {
                   <td className="py-2">
                     {test.test_result && (
                       <a
-                        href={`http://localhost:8000${test.test_result}`}
+                        href={`${server}${test.test_result}`}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-blue-500 hover:underline"

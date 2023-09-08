@@ -1,8 +1,9 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
-
+import {server} from '../../server'
 export const AddDoctor = () => {
+  
   const navigate =useNavigate()
   const [doctorData,setDoctorData] =useState({
     doctor_name :'',
@@ -31,7 +32,7 @@ export const AddDoctor = () => {
   useEffect(() => {
     async function getDepartment() {
       try {
-        const response = await axios.get("http://localhost:8000/doctor/departments/");
+        const response = await axios.get(`${server}/doctor/departments/`);
         setDepartments(response.data);
       } catch (error) {
        
@@ -44,7 +45,7 @@ export const AddDoctor = () => {
   useEffect(() => {
     async function getQualification() {
       try {
-        const response = await axios.get("http://localhost:8000/doctor/qualifications/");
+        const response = await axios.get(`${server}/doctor/qualifications/`);
         setQualifications(response.data);
       } catch (error) {
         
@@ -94,7 +95,7 @@ const handleSubmit = async (e) =>{
       latitude:doctorData.address.latitude,
       longitude:doctorData.address.longitude
     };
-    const addressResponse = await axios.post("http://localhost:8000/doctor/address_create/",addressData);
+    const addressResponse = await axios.post(`${server}/doctor/address_create/`,addressData);
 
     const addressId=addressResponse.data.id;
     console.log(addressData)
@@ -111,7 +112,7 @@ const handleSubmit = async (e) =>{
     formData.append('more_details', doctorData.more_details);
     formData.append('address',addressId);
     console.log(formData,'full data')
-    const response = await axios.post('http://localhost:8000/doctor/register/',formData,{
+    const response = await axios.post(`${server}/doctor/register/`,formData,{
       headers:{
         'Content-Type':'multipart/form-data',
       },
@@ -343,38 +344,3 @@ const handleSubmit = async (e) =>{
   </div>
   )
 }
-
-
-//  const handleSubmit = async (e) => {
-//   e.preventDefault();
-//   try {
-//     const formData = new FormData();
-//     formData.append('doctor_name', doctorData.doctor_name);
-//     formData.append('doctor_image', doctorData.doctor_image);
-//     formData.append('email', doctorData.email);
-//     formData.append('password', doctorData.password);
-//     formData.append('department', doctorData.department);
-//     formData.append('qualification', doctorData.qualification);
-//     formData.append('phone', doctorData.phone);
-//     formData.append('fee', doctorData.fee);
-//     formData.append('more_details', doctorData.more_details);
-//     formData.append('address[state]', doctorData.address.state);
-//     formData.append('address[district]', doctorData.address.district);
-//     formData.append('address[street]', doctorData.address.street);
-//     formData.append('address[building]', doctorData.address.building);
-//     formData.append('address[room]', doctorData.address.room);
-//     formData.append('address[latitude]', doctorData.address.lattitude);
-//     formData.append('address[longitude]', doctorData.address.longitude);
-//     console.log(formData,'form')
-//     const response = await axios.post('http://localhost:8000/doctor/register/', formData, {
-//       headers: {
-//         'Content-Type': 'multipart/form-data',
-//       },
-//     });
-
-//     console.log(response.data); // Handle the response as needed
-//   } catch (error) {
-//     console.error(error);
-//   }
-// };
-// console.log('form data',formData)

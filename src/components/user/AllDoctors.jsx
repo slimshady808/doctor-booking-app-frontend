@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import {  Link } from 'react-router-dom';
-
+import {server} from '../../server'
 export const AllDoctors = () => {
+  
   const [doctors,setDoctors] =useState([])
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedDepartment, setSelectedDepartment] = useState('');
@@ -14,7 +15,7 @@ export const AllDoctors = () => {
 
   const fetchDoctorsData = async()=>{
     try{
-      const response = await axios.get('http://localhost:8000/doctor/doctors/',{
+      const response = await axios.get(`${server}/doctor/doctors/`,{
         params:{
           search :searchQuery,
           department_id:selectedDepartment,
