@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import {fetchTests} from '../../Services/DoctorService'
 import { toast,Toaster } from "react-hot-toast";
 import {deleteTest} from '../../Services/DoctorService'
+import { server } from '../../server';
 // import { toast } from 'react-hot-toast';
 // import { faTrash } from '@fortawesome/free-solid-svg-icons';
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -98,7 +99,7 @@ const handleDelete = async  (testId)=>{
                 </thead>
                 <tbody>
                   {tests.map((test) => {
-                      const result_file=`http://localhost:8000${test.result}`;
+                    const result_file=`${server}${test.result}`;
                     return(
                       
                     <tr key={test.test_id} className="border-t">
