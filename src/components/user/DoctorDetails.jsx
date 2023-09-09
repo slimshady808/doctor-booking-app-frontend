@@ -170,9 +170,7 @@ useEffect(()=>{
                 Start Chat 
             </Link>
 
-            <h1
-            onClick={()=>console.log(doctorId,profileId)}
-            >come</h1>
+           
         </div>
       </div>
     </div>

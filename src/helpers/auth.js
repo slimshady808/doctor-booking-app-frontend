@@ -59,7 +59,7 @@ export async function getAccess() {
       // Access token has expired, handle token refresh
       try {
         // Use the "refresh" token to get a new "access" token
-        const refreshResponse = await axios.post('http://localhost:8000/api/token/refresh/', {
+        const refreshResponse = await axios.post(`${server}/api/token/refresh/`, {
           refresh: data.refresh,
         });
 

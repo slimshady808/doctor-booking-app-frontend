@@ -25,7 +25,7 @@ export const otpVarification = async (formData)=>{
 
 export const fetchDoctorData = async (doctorId) => {
   try {
-    const response = await axios.get(`http://localhost:8000/doctor/doctor/${doctorId}/`);
+    const response = await axios.get(`${server}/doctor/doctor/${doctorId}/`);
     return response.data;
   } catch (error) {
     console.error('Error fetching doctor data:', error);
@@ -35,7 +35,7 @@ export const fetchDoctorData = async (doctorId) => {
 
 export const fetchDepartmentById = async (departmentId)=>{
   try{
-    const response = await axios.get(`http://localhost:8000/doctor/department/${departmentId}/`);
+    const response = await axios.get(`${server}/doctor/department/${departmentId}/`);
     return response.data;
   }catch(error){
     console.error('error fetching department by id:',error)
@@ -45,7 +45,7 @@ export const fetchDepartmentById = async (departmentId)=>{
 
 export const fetchQualificationById = async (qualificationId)=>{
   try{
-    const response = await axios.get(`http://localhost:8000/doctor/qualification/${qualificationId}/`);
+    const response = await axios.get(`${server}/doctor/qualification/${qualificationId}/`);
     return response.data;
   }catch(error){
     console.error('error fetching qualification by id:',error)
@@ -55,7 +55,7 @@ export const fetchQualificationById = async (qualificationId)=>{
 
 export const fetchAddressById = async (addressId)=>{
   try{
-    const response = await axios.get(`http://localhost:8000/doctor/address_edit/${addressId}/`);
+    const response = await axios.get(`${server}/doctor/address_edit/${addressId}/`);
     return response.data
   }catch(error){
     console.error('error of fetching address data:',error)
@@ -65,7 +65,7 @@ export const fetchAddressById = async (addressId)=>{
 
 export const fetchAvailableDates = async (doctorId)=>{
   try{
-    const response = await axios.get(`http://localhost:8000/doctor/get_available_dates/${doctorId}/`);
+    const response = await axios.get(`${server}/doctor/get_available_dates/${doctorId}/`);
     return response.data.available_dates
   }catch(error){
     console.error('error of getting available dates:',error)
@@ -75,7 +75,7 @@ export const fetchAvailableDates = async (doctorId)=>{
 
 export const fetchAvailableSlots = async (doctorId,date)=>{
   try{
-    const response = await axios.get(`http://localhost:8000/doctor/get_available_slots/${doctorId}/?date=${date}`);
+    const response = await axios.get(`${server}/doctor/get_available_slots/${doctorId}/?date=${date}`);
     return response.data.available_slots
   }catch(error){
     console.log('error of getting available slotes:',error)
@@ -85,7 +85,7 @@ export const fetchAvailableSlots = async (doctorId,date)=>{
 
 export const fetchPatients = async (userId)=>{
   try{
-    const response = await axios.get(`http://localhost:8000/api/patients/${userId}/`)
+    const response = await axios.get(`${server}/api/patients/${userId}/`)
     return response.data
   }catch(error){
     console.error('error of getting patients:',error)

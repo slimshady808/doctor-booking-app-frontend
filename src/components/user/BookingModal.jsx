@@ -271,7 +271,7 @@ const handleBookNow = async ()=>{
     setIsModalOpen(false)
     setBooking(bookingId)
     setFees(amount)
-    // console.log('booooking',bookingId)
+    //console.log('booooking',bookingId)
     showRazorpay(bookingId)
    }else{
     toast.error('error for for booking');
