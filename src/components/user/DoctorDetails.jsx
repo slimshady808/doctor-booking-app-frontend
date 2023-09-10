@@ -6,6 +6,7 @@ import {fetchDoctorData,fetchDepartmentById,fetchQualificationById, fetchAddress
 import { BsMenuButton } from 'react-icons/bs';
 import { toast } from 'react-hot-toast';
 import { ReviewComponent } from './ReviewComponent';
+import { get_user_data } from '../../helpers/auth';
 export const DoctorDetails = () => {
   
   const { doctorId } = useParams();
@@ -20,9 +21,15 @@ export const DoctorDetails = () => {
   const [availableDate,setAvailableDate]=useState([])
   const [amount,setAmount]=useState('')
   const[profileId,setProfileId]=useState('')
-  
+  const[user_id,setUserId] =useState('')
   
   const [imgUrl, setImgUrl] = useState('');
+
+  useState(()=>{
+    const data=get_user_data()
+    setUserId(data.user_id)
+  },[])
+
   
   useEffect(() => {
     const fetchData = async () => {
@@ -164,7 +171,7 @@ useEffect(()=>{
 
           <Link
                
-                to={`/user/chat/${doctorId}/${profileId}`} 
+                to={`/user/chat/${user_id}/${profileId}`} 
                 className="bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded focus:outline-none focus:shadow-outline "
             >
                 Start Chat 

@@ -1,27 +1,31 @@
-import React, { useEffect, useState } from "react";
-import {fetch_user_messages,createMessage} from '../../Services/UserService'
+import React, { useEffect, useState, useRef } from "react";
+import { fetch_user_messages, createMessage } from '../../Services/UserService';
 import { getAccessToken } from '../../helpers/auth';
 import jwt_decode from 'jwt-decode';
 import { useParams } from "react-router-dom";
-export const UserChat=()=>{
-    
+import { wserver } from "../../server";
+
+export const UserChat = () => {
     const [messages, setMessages] = useState([]);
     const [userId, setUser] = useState('');
     const [loading, setLoading] = useState(true);
     const [messageInput, setMessageInput] = useState('');
     const [socket, setSocket] = useState(null);
-    const { doctorId,profileId } = useParams();
+    const { user_id, profileId } = useParams();
+    const [roomName, setRoomName] = useState('');
+    const messageContainerRef = useRef(null);
 
-    useEffect(()=>{
-        const fetchData = async ()=>{
-            const token=getAccessToken()
-            const decode = jwt_decode(token)
-            const user= decode.user_id;
-            setUser(user)
+    useEffect(() => {
+        const fetchData = async () => {
+            const token = getAccessToken();
+            const decode = jwt_decode(token);
+            const user = decode.user_id;
+            setUser(String(user));
 
-            if(user){
-                const data = await fetch_user_messages(profileId,user)
-                if (data){
+            if (user) {
+                const data = await fetch_user_messages(profileId, user);
+
+                if (data) {
                     setMessages(data);
                 }
             }
@@ -29,70 +33,67 @@ export const UserChat=()=>{
         };
         fetchData();
 
-        const newSocket = new WebSocket(`ws://localhost:8000/ws/chat/`);
+        const roomName = `${user_id}_${profileId}`;
+        const newSocket = new WebSocket(`ws://${wserver}/chat/${roomName}/`);
         setSocket(newSocket);
-        // return ()=>{
-        //     newSocket.close();
-        // }
 
-    },[doctorId]);
-  
-    useEffect(()=>{
-        if (socket){
-            socket.onopen=()=>{
+    }, []);
+
+    useEffect(() => {
+        if (socket) {
+            socket.onopen = () => {
                 console.log("websocket connection opened");
             }
-            socket.onmessage=(event)=>{
-                const data = JSON.parse(event.data)
-                const message_get=data.message_content
-                console.log(message_get,'return message user')
-                setMessages((prevMessages)=>[...prevMessages,data]);
-
+            socket.onmessage = (event) => {
+                const data = JSON.parse(event.data);
+                const message_get = data.message_content;
+                console.log(data, 'return message user');
+                setMessages((prevMessages) => [...prevMessages, data]);
             };
         }
-    },[socket])
+    }, [socket]);
 
-
-
-        useEffect(() => {
+    useEffect(() => {
         return () => {
             if (socket) {
                 socket.close();
             }
         };
     }, [socket]);
-    
 
-    const handleSendMessage= async ()=>{
-        if (messageInput.trim()==='') return;
+    useEffect(() => {
+        // Scroll to the bottom of the message container when messages change
+        if (messageContainerRef.current) {
+            messageContainerRef.current.scrollTop = messageContainerRef.current.scrollHeight;
+        }
+    }, [messages]);
 
-        try{
-            const newMessage={
-                sender: userId,
+    const handleSendMessage = async () => {
+        if (messageInput.trim() === '') return;
+
+        try {
+            const newMessage = {
+                sender: user_id,
                 receiver: profileId,
                 message_content: messageInput,
-                
             };
-            const response =await createMessage(newMessage);
-            if (response){
-
-            if (socket){
-                socket.send(JSON.stringify(newMessage));
+            const response = await createMessage(newMessage);
+            if (response) {
+                if (socket) {
+                    socket.send(JSON.stringify(newMessage));
+                }
+                setMessageInput('');
             }
-            //setMessages([...messages,response])
-            setMessageInput('')
-        }
-        }catch(error){
-            console.error('error for sending messages:',error);
+        } catch (error) {
+            console.error('error for sending messages:', error);
         }
     };
 
     return (
         <div className="flex flex-col h-screen bg-gray-100">
-       dc: {doctorId}prof:{profileId}
-            <div className="flex-grow overflow-y-auto px-4 py-8">
+            <div className="flex-grow overflow-y-auto px-4 py-8" ref={messageContainerRef}>
                 {loading ? (
-                    <p>Loading messages...</p>
+                    <p className="text-center text-gray-600">Loading messages...</p>
                 ) : (
                     messages.map((message, index) => (
                         <div
@@ -102,10 +103,10 @@ export const UserChat=()=>{
                             }`}
                         >
                             <div
-                                className={`rounded-lg p-2 max-w-xs ${
+                                className={`rounded-lg p-2 max-w-md ${
                                     message.sender == profileId
                                         ? 'bg-green-500 text-white'
-                                        : 'bg-white text-gray-800'
+                                        : 'bg-blue-500 text-white'
                                 }`}
                             >
                                 {message.message_content}
@@ -116,7 +117,7 @@ export const UserChat=()=>{
             </div>
             <div className="bg-white p-4 border-t flex">
                 <input
-                    className="border rounded p-2 w-full"
+                    className="border rounded p-2 w-full focus:outline-none"
                     type="text"
                     placeholder="Type your message..."
                     value={messageInput}
@@ -131,9 +132,7 @@ export const UserChat=()=>{
             </div>
         </div>
     );
-
-}
-
+};
 
 
 
@@ -148,118 +147,114 @@ export const UserChat=()=>{
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-// import React, { useEffect, useState } from 'react';
-// import { useParams } from 'react-router-dom';
-// import { getAccess, getAccessToken } from '../../helpers/auth';
-// import { fetch_user_messages,createMessage } from '../../Services/UserService';
+// import React, { useEffect, useState } from "react";
+// import {fetch_user_messages,createMessage} from '../../Services/UserService'
+// import { getAccessToken } from '../../helpers/auth';
 // import jwt_decode from 'jwt-decode';
-
-
-// export const UserChat = () => {
+// import { useParams } from "react-router-dom";
+// import { wserver } from "../../server";
+// export const UserChat=()=>{
+    
 //     const [messages, setMessages] = useState([]);
 //     const [userId, setUser] = useState('');
-//     const [loading, setLoading] = useState(true); 
-//     const [messageInput,setImessageInput]=useState('')
-//     const [socket,setSocket]=useState(null)
-//     const { doctorId } = useParams();
+//     const [loading, setLoading] = useState(true);
+//     const [messageInput, setMessageInput] = useState('');
+//     const [socket, setSocket] = useState(null);
+//     const { user_id,profileId } = useParams();
+//     const [roomName,setRoomName]=useState('')
 
-//     useEffect(() => {
-//         const fetchData = async () => {
-//             const token = getAccessToken();
-//             const decode = jwt_decode(token);
-//             const user = decode.user_id;
-//             setUser(user);
 
-//             if (user) {
-//                 const data = await fetch_user_messages(doctorId, user);
-//                 if (data) {
+
+//     useEffect(()=>{
+//         const fetchData = async ()=>{
+//             const token=getAccessToken()
+//             const decode = jwt_decode(token)
+//             const user= decode.user_id;
+//             setUser(String(user));
+
+//             if(user){
+        
+//                 const data = await fetch_user_messages(profileId,user)
+         
+//                 if (data){
 //                     setMessages(data);
 //                 }
+
+        
+  
 //             }
-
-//             setLoading(false); 
+//             setLoading(false);
 //         };
-
 //         fetchData();
-
-//         const newSocket = new WebSocket(`ws://localhost:8000/ws/chat/`);
-
+      
+   
+//         const roomName = `${user_id}_${profileId}`;
+//         const newSocket = new WebSocket(`ws://${wserver}/chat/${roomName}/`);
 //         setSocket(newSocket)
+  
 
-//         // return ()=>{
-//         //     newSocket.close();
-//         // }
-//     }, [doctorId]);
+//     },[]);
 
-//     console.log('user message:',messages)
 
-//     useEffect(() => {
+  
+//     useEffect(()=>{
+//         if (socket){
+//             socket.onopen=()=>{
+//                 console.log("websocket connection opened");
+//             }
+//             socket.onmessage=(event)=>{
+//                 const data = JSON.parse(event.data)
+//                 const message_get=data.message_content
+//                 console.log(data,'return message user')
+//                 setMessages((prevMessages)=>[...prevMessages,data]);
+
+//             };
+//         }
+//     },[socket])
+
+
+
+//         useEffect(() => {
 //         return () => {
 //             if (socket) {
 //                 socket.close();
 //             }
 //         };
 //     }, [socket]);
+    
 
-//     useEffect(()=>{
-//         if (socket){
-//             socket.onopen=()=>{
-//                 console.log("websocket connection opened");
-//             };
-//             socket.onmessage=(event)=>{
-//                 const message = JSON.parse(event.data)
-//                 setMessages((prevMessages)=>[...prevMessages,message])
-//             }
-//         }
-//     },[socket])
-
-
-//     const handleSendMessage = async()=>{
-//         if (messageInput.trim()==='') return
+//     const handleSendMessage= async ()=>{
+//         if (messageInput.trim()==='') return;
 
 //         try{
 //             const newMessage={
-//                 sender:userId,
-//                 receiver:doctorId,
-//                 message_content:messageInput,
+//                 sender: user_id,
+//                 receiver: profileId,
+//                 message_content: messageInput,
+                
 //             };
-//             const response = await createMessage(newMessage);
+//             const response =await createMessage(newMessage);
 //             if (response){
-//                 setMessages([...messages,response])
-//                 setImessageInput('')
 
-//                 if(socket){
-//                     socket.send(JSON.stringify({"message": "hifront"}));
-
-//                 }
+//             if (socket){
+//                 socket.send(JSON.stringify(newMessage));
 //             }
-//         }catch(error){
-//             console.error('error for creating messages:',error)
+//             //setMessages([...messages,response])
+//             setMessageInput('')
 //         }
-//     }
-
-
+//         }catch(error){
+//             console.error('error for sending messages:',error);
+//         }
+//     };
 
 //     return (
 //         <div className="flex flex-col h-screen bg-gray-100">
+//        dc: {userId}prof:{profileId}
 //             <div className="flex-grow overflow-y-auto px-4 py-8">
 //                 {loading ? (
 //                     <p>Loading messages...</p>
 //                 ) : (
-//                     messages.map((message,index) => (
+//                     messages.map((message, index) => (
 //                         <div
 //                             key={index}
 //                             className={`flex mb-4 ${
@@ -268,13 +263,14 @@ export const UserChat=()=>{
 //                         >
 //                             <div
 //                                 className={`rounded-lg p-2 max-w-xs ${
-//                                     message.sender == doctorId
+//                                     message.sender == profileId
 //                                         ? 'bg-green-500 text-white'
 //                                         : 'bg-white text-gray-800'
 //                                 }`}
 //                             >
 //                                 {message.message_content}
 //                             </div>
+                        
 //                         </div>
 //                     ))
 //                 )}
@@ -285,25 +281,19 @@ export const UserChat=()=>{
 //                     type="text"
 //                     placeholder="Type your message..."
 //                     value={messageInput}
-//                     onChange={(e)=>setImessageInput(e.target.value)}
+//                     onChange={(e) => setMessageInput(e.target.value)}
 //                 />
-//                 <button 
-//                 className="ml-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-//                 onClick={handleSendMessage}
+//                 <button
+//                     className="ml-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+//                     onClick={handleSendMessage}
 //                 >
 //                     Send
 //                 </button>
 //             </div>
 //         </div>
 //     );
-// };
 
-
-
-
-
-
-
+// }
 
 
 
