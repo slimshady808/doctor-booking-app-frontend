@@ -20,6 +20,7 @@ export const DoctorDetails = () => {
   const [department,setDepartment]=useState('')
   const [availableDate,setAvailableDate]=useState([])
   const [amount,setAmount]=useState('')
+  const [name,setName]=useState('')
   const[profileId,setProfileId]=useState('')
   const[user_id,setUserId] =useState('')
   
@@ -38,6 +39,7 @@ export const DoctorDetails = () => {
       if (data) {
      
         setDoctor(data);
+        setName(data.doctor_name)
         setAddressId(data.address);
         setImgUrl(data.doctor_image);
         setDepartmentId(data.doctor_department);

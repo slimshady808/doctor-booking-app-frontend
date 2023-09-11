@@ -4,6 +4,7 @@ import { getAccessToken } from '../../helpers/auth';
 import jwt_decode from 'jwt-decode';
 import { useParams } from "react-router-dom";
 import { wserver } from "../../server";
+import { ChatHeader } from "./ChatHeader";
 
 export const UserChat = () => {
     const [messages, setMessages] = useState([]);
@@ -11,9 +12,13 @@ export const UserChat = () => {
     const [loading, setLoading] = useState(true);
     const [messageInput, setMessageInput] = useState('');
     const [socket, setSocket] = useState(null);
-    const { user_id, profileId } = useParams();
-    const [roomName, setRoomName] = useState('');
+    const { user_id, profileId} = useParams();
+ 
     const messageContainerRef = useRef(null);
+
+    useEffect(()=>{
+        console.log('doc',profileId)
+    },[])
 
     useEffect(() => {
         const fetchData = async () => {
@@ -34,7 +39,9 @@ export const UserChat = () => {
         fetchData();
 
         const roomName = `${user_id}_${profileId}`;
-        const newSocket = new WebSocket(`ws://${wserver}/chat/${roomName}/`);
+        
+        // const newSocket = new WebSocket(`ws://${wserver}/chat/${roomName}/`);
+        const newSocket = new WebSocket(`wss://${wserver}/chat/${roomName}/`);
         setSocket(newSocket);
 
     }, []);
@@ -91,6 +98,7 @@ export const UserChat = () => {
 
     return (
         <div className="flex flex-col h-screen bg-gray-100">
+        <ChatHeader/>
             <div className="flex-grow overflow-y-auto px-4 py-8" ref={messageContainerRef}>
                 {loading ? (
                     <p className="text-center text-gray-600">Loading messages...</p>
