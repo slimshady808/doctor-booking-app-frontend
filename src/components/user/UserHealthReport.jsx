@@ -79,7 +79,7 @@ export const UserHealthReport = () => {
                   <td className="py-2">
                     {test.test_result && (
                       <a
-                        href={`http://localhost:8000${test.test_result}`}
+                        href={`${server}${test.test_result}`}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-blue-500 hover:underline"
