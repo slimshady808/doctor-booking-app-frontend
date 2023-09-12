@@ -6,7 +6,7 @@ export const server=import.meta.env.VITE_SERVER
 export const wserver=import.meta.env.VITE_WSERVER
 
 
-// export const server="http://127.0.0.1:8000"
+// export const server=""
 
-// export const wserver="localhost:8000/ws"
+// export const wserver=""
 

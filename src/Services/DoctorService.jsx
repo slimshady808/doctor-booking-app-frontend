@@ -290,3 +290,18 @@ export const fetchDoctorDetails= async(doctor_id)=>{
     return null
   }
 }
+
+export const fetchUserData = async(user_id)=>{
+  try{
+    const token = await getAccess()
+    const token1= getAccessToken()
+    const headers ={
+      Authorization : `Bearer${token}`
+    }
+    const response= await axios.get(`${server}/api/user/${user_id}/`)
+    return response.data
+  }catch(error){
+    console.error('error or fetching doctor by user id :',error)
+    return null
+  }
+  }

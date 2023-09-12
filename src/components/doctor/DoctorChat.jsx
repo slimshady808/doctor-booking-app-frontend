@@ -2,7 +2,8 @@ import React, { useEffect, useState, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import { fetch_user_messages, createMessage } from '../../Services/UserService';
 import { server, wserver } from '../../server';
-
+import { ChatHeader } from '../user/ChatHeader';
+import {fetchUserData} from '../../Services/DoctorService'
 export const DoctorChat = () => {
     const { userId, doctorId } = useParams();
     const [messages, setMessages] = useState([]);
@@ -10,6 +11,24 @@ export const DoctorChat = () => {
     const [messageInput, setMessageInput] = useState('');
     const [socket, setSocket] = useState(null);
     const messagesContainerRef = useRef(null);
+    const [name,setName]=useState('')
+    const [img,setImg]=useState(null)
+
+
+
+    console.log(userId)
+
+    useEffect(()=>{
+        const fetchData=async()=>{
+            const response = await fetchUserData(userId)
+            if (response){
+                setName(response.username)
+                setImg(response.image_of_user)
+                console.log(response)
+            }
+        }
+        fetchData()
+    },[])
 
     useEffect(() => {
         const fetchData = async () => {
@@ -22,7 +41,8 @@ export const DoctorChat = () => {
         fetchData();
 
         const roomName = `${userId}_${doctorId}`;
-        const newSocket = new WebSocket(`wss://${wserver}/chat/${roomName}/`);
+        const newSocket = new WebSocket(`ws://${wserver}/chat/${roomName}/`);
+        // const newSocket = new WebSocket(`wss://${wserver}/chat/${roomName}/`);
         setSocket(newSocket);
     }, [userId]);
 
@@ -67,7 +87,8 @@ export const DoctorChat = () => {
 
     return (
         <div className="flex flex-col h-screen bg-gray-100">
-            {userId} {doctorId}
+         <ChatHeader name={name} image={img} />
+            {/* {userId} {doctorId} */}
             <div className="flex-grow overflow-y-auto px-4 py-8" ref={messagesContainerRef}>
                 {loading ? (
                     <p>Loading messages...</p>

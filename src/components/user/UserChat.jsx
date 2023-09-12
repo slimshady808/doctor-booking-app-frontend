@@ -5,7 +5,7 @@ import jwt_decode from 'jwt-decode';
 import { useParams } from "react-router-dom";
 import { wserver } from "../../server";
 import { ChatHeader } from "./ChatHeader";
-
+import {fetchDoctorByUserProfile} from '../../Services/UserService'
 export const UserChat = () => {
     const [messages, setMessages] = useState([]);
     const [userId, setUser] = useState('');
@@ -13,11 +13,23 @@ export const UserChat = () => {
     const [messageInput, setMessageInput] = useState('');
     const [socket, setSocket] = useState(null);
     const { user_id, profileId} = useParams();
+    const [userData,setUserData]=useState([])
+    const[docname,setDocname]=useState('')
+    const[docImage,setDocImage]=useState(null)
  
     const messageContainerRef = useRef(null);
 
     useEffect(()=>{
-        console.log('doc',profileId)
+        const fetchData = async()=>{
+            const response =await fetchDoctorByUserProfile(profileId)
+            if (response){
+                console.log(response)
+                setUserData(response)
+                setDocImage(response.doctor_image)
+                setDocname(response.doctor_name)
+            }
+        }
+        fetchData()
     },[])
 
     useEffect(() => {
@@ -40,8 +52,8 @@ export const UserChat = () => {
 
         const roomName = `${user_id}_${profileId}`;
         
-        // const newSocket = new WebSocket(`ws://${wserver}/chat/${roomName}/`);
-        const newSocket = new WebSocket(`wss://${wserver}/chat/${roomName}/`);
+        const newSocket = new WebSocket(`ws://${wserver}/chat/${roomName}/`);
+        // const newSocket = new WebSocket(`wss://${wserver}/chat/${roomName}/`);
         setSocket(newSocket);
 
     }, []);
@@ -98,7 +110,8 @@ export const UserChat = () => {
 
     return (
         <div className="flex flex-col h-screen bg-gray-100">
-        <ChatHeader/>
+        <ChatHeader name={docname} image={docImage} />
+
             <div className="flex-grow overflow-y-auto px-4 py-8" ref={messageContainerRef}>
                 {loading ? (
                     <p className="text-center text-gray-600">Loading messages...</p>

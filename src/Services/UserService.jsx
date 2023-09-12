@@ -305,3 +305,17 @@ export const fetchDoctorByDepartment = async (departmentId)=>{
     return null
   }
 }
+export const fetchDoctorByUserProfile = async(user_id)=>{
+try{
+  const token = await getAccess()
+  const token1= getAccessToken()
+  const headers ={
+    Authorization : `Bearer${token}`
+  }
+  const response= await axios.get(`${server}/doctor/doctor_by_user_id/${user_id}`)
+  return response.data
+}catch(error){
+  console.error('error or fetching doctor by user id :',error)
+  return null
+}
+}

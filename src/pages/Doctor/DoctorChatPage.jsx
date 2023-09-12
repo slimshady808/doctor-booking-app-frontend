@@ -5,7 +5,7 @@ import { DoctorNavBar } from '../../components/doctor/DoctorNavBar'
 export const DoctorChatPage = () => {
   return (
     <>
-    <DoctorNavBar/>
+    {/* <DoctorNavBar/> */}
       <DoctorChat/>
     </>
   )
