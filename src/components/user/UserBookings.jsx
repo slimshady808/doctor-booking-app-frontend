@@ -10,7 +10,7 @@ import { server } from '../../server';
 export const UserBookings = () => {
   const [bookings,setBookings]=useState([])
   const [userId,setUserId]=useState('')
-  const [nextPage, setNextPage] = useState(null);
+ 
 
   
     useEffect(() => {
@@ -22,16 +22,16 @@ export const UserBookings = () => {
   
         setUserId(fetchedUserId);
   
-        const data = await fetchUserBookingHistory(fetchedUserId, nextPage);
+        const data = await fetchUserBookingHistory(fetchedUserId);
         if (data) {
           // setBookings(data.user_bookings);
           setBookings([...bookings, ...data.user_bookings]);
-          setNextPage(data.next); 
+         
         }
       };
   
       fetchData();
-    }, [nextPage]); // Empty dependency array, so this runs only once on mount
+    }, []); // Empty dependency array, so this runs only once on mount
   
     console.log(userId, 'userId');
     console.log(bookings, 'bookings');

@@ -4,17 +4,23 @@ import { HomePage } from './pages/User/HomePage';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 
 
+
+
+import {AdminRoutes} from './Routes/AdminRoutes'
+import { PrivateRoute } from './utils/PrivateRoute';
+import { DoctorRoutes } from './Routes/DoctorRoutes';
+import { UserRoutes } from './Routes/UserRoutes';
+
 import {SignUp} from './pages/SignUp'
 import {LoginPage} from './pages/LoginPage'
 import { OTP } from './components/user/OTP';
 import { ResetPasswordPage } from './pages/Doctor/ResetPasswordPage';
 import { ForgotPasswordPage } from './pages/ForgotPasswordPage';
 import { ResetPasswordNew } from './components/user/ResetPasswordNew';
+import { NotFoundPage } from './pages/NotFoundPage';
 
-import {AdminRoutes} from './Routes/AdminRoutes'
-import { PrivateRoute } from './utils/PrivateRoute';
-import { DoctorRoutes } from './Routes/DoctorRoutes';
-import { UserRoutes } from './Routes/UserRoutes';
+
+
 function App() {
 
 
@@ -38,7 +44,7 @@ function App() {
     <Route path="/user/*" element={<UserRoutes/>} />
  
 
-   
+    <Route path="*" element={<NotFoundPage />} />
 
 
     </Routes>

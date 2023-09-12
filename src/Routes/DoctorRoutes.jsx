@@ -1,5 +1,6 @@
 import React from "react";
-import {Route,Routes} from 'react-router-dom'
+import jwt_decode from "jwt-decode"
+import {Navigate, Route,Routes} from 'react-router-dom'
 import { DoctorHistoryPage } from "../pages/Doctor/DoctorHistoryPage";
 import { DoctorAddSlotPage } from "../pages/Doctor/DoctorAddSlotPage";
 import DoctorReviewPage from "../pages/Doctor/DoctorReviewPage";
@@ -7,11 +8,29 @@ import { AddReportPage } from "../pages/Doctor/AddReportPage";
 import { AddTestResultPage } from "../pages/Doctor/AddTestResultPage";
 import { DoctorChatPage } from "../pages/Doctor/DoctorChatPage";
 import { EditProfilePage } from "../pages/Doctor/EditProfilePage";
+import { getAccess, getAccessToken, getLocal } from "../helpers/auth";
+import { LoginPage } from "../pages/LoginPage";
+import { NotFoundPage } from "../pages/NotFoundPage";
 // import { DoctorReveneuPage } from "../pages/Doctor/DoctorReveneuPage";
 
 
 
 export const DoctorRoutes = () => {
+
+  const authToken = getAccessToken()
+
+  if(!authToken){
+    console.log('no token')
+    return <LoginPage/>
+  }
+  const decode= jwt_decode(authToken);
+
+  if (decode.role !== "doctor"){
+    console.log('not doctor')
+    return <LoginPage/>
+  }
+
+
 
   return (
    <Routes>
@@ -22,6 +41,7 @@ export const DoctorRoutes = () => {
     <Route path="/addTest/:bookingId/:patientId/:doctorId" element={<AddTestResultPage/>} />
     <Route path="/chat/:userId/:doctorId" element={<DoctorChatPage/>} />
     <Route path="/edit-profile"element={<EditProfilePage/>}/>
+    <Route path="*" element={<NotFoundPage />} />
    </Routes>
   )
 }
