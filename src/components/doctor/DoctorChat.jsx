@@ -41,8 +41,8 @@ export const DoctorChat = () => {
         fetchData();
 
         const roomName = `${userId}_${doctorId}`;
-        const newSocket = new WebSocket(`ws://${wserver}/chat/${roomName}/`);
-        // const newSocket = new WebSocket(`wss://${wserver}/chat/${roomName}/`);
+        // const newSocket = new WebSocket(`ws://${wserver}/chat/${roomName}/`);
+        const newSocket = new WebSocket(`wss://${wserver}/chat/${roomName}/`);
         setSocket(newSocket);
     }, [userId]);
 
