@@ -4,6 +4,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { userHelthReport } from '../../Services/UserService';
+import { server } from '../../server';
 
 export const UserHealthReport = () => {
   const [reportData, setReportData] = useState([]);
