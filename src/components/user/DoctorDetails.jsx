@@ -62,6 +62,8 @@ useEffect(()=>{
   fetchData()
 },[departmentId])
 
+
+
 useEffect(()=>{
   const fetchData = async ()=>{
     const data = await fetchQualificationById(qualificationId);

@@ -18,7 +18,7 @@ export const DoctorNavBar = () => {
               title="Our product"
               class="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
             >
-              ProductZ
+              {/* ProductZ */}
             </a>
           </li>
           <li>
@@ -28,7 +28,7 @@ export const DoctorNavBar = () => {
               title="Our product"
               class="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
             >
-              Features
+              {/* Features */}
             </a>
           </li>
           <li>
@@ -38,7 +38,7 @@ export const DoctorNavBar = () => {
               title="Product pricing"
               class="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
             >
-              Pricing
+              {/* Pricing */}
             </a>
           </li>
         </ul>
@@ -64,7 +64,7 @@ export const DoctorNavBar = () => {
             <rect x="14" y="11" width="7" height="12" />
           </svg>
           <span class="ml-2 text-xl font-bold tracking-wide text-gray-800 uppercase">
-            Company
+            DocTime
           </span>
         </a>
         <ul class="flex items-center hidden ml-auto space-x-8 lg:flex">

@@ -35,7 +35,7 @@ export const fetchDoctorData = async (doctorId) => {
 
 export const fetchDepartmentById = async (departmentId)=>{
   try{
-    const response = await axios.get(`${server}/doctor/department/${departmentId}/`);
+    const response = await axios.get(`${server}/doctor/departments/${departmentId}/`);
     return response.data;
   }catch(error){
     console.error('error fetching department by id:',error)
@@ -45,7 +45,7 @@ export const fetchDepartmentById = async (departmentId)=>{
 
 export const fetchQualificationById = async (qualificationId)=>{
   try{
-    const response = await axios.get(`${server}/doctor/qualification/${qualificationId}/`);
+    const response = await axios.get(`${server}/doctor/qualifications/${qualificationId}/`);
     return response.data;
   }catch(error){
     console.error('error fetching qualification by id:',error)

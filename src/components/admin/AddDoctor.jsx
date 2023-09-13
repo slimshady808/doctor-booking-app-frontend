@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import {server} from '../../server'
+import toast, { Toaster } from 'react-hot-toast';
 export const AddDoctor = () => {
   
   const navigate =useNavigate()
@@ -120,6 +121,7 @@ const handleSubmit = async (e) =>{
     console.log(response.data)
     navigate('/admin/doctor_management')
   }catch(error){
+    toast.error('please fill all fields')
     console.error(error)
   }
 };
@@ -128,9 +130,9 @@ const handleSubmit = async (e) =>{
 
 
 
-
   return (
     <div className="max-w-lg mx-auto my-8 px-4">
+       <Toaster position="top-center" reverseOrder={false}></Toaster>
     <h2 className="text-2xl font-bold mb-4">Add Doctor</h2>
     <form onSubmit={handleSubmit} className="space-y-4">
       <div className="flex items-center space-x-4">

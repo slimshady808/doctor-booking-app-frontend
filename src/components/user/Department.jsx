@@ -38,7 +38,7 @@ export const Department = () => {
           <div className="grid gap-8 lg:grid-cols-3 sm:max-w-sm sm:mx-auto lg:max-w-full">
 
             {depertmentList.map((department)=>{
-              const imageUrl = `${server}${department.picture}`;
+              const imageUrl = `${department.picture}`;
 
 
               return(
