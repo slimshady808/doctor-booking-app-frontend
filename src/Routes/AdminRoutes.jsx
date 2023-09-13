@@ -19,6 +19,7 @@ import { AddQualificationPage } from '../pages/Admin/AddQualificationPage';
 import { EditQualificationPage } from '../pages/Admin/EditQualificationPage';
 import { AddTestTitlesPage } from '../pages/Admin/AddTestTitlesPage';
 import { EditTestTitlesPage } from '../pages/Admin/EditTestTitlesPage';
+import { DashBoard } from '../components/admin/DashBoard';
 
 export const AdminRoutes = () => {
 
@@ -52,6 +53,7 @@ export const AdminRoutes = () => {
       <Route path="/edit_qualification/:id" element={<EditQualificationPage/>}/>
       <Route path="/add_test_title" element={<AddTestTitlesPage/>}/>
       <Route path="/edit_test_title/:id" element={<EditTestTitlesPage/>}/>
+      <Route path="/details" element={<DashBoard/>}/>
 
 
 

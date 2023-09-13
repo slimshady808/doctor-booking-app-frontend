@@ -12,15 +12,18 @@ export const AllBooking = () => {
       const response = await fetchBooking();
       if (response) {
         setBookings(response);
+    
       }
     };
     fetchData();
   }, []);
 
+ 
+
   return (
     <div className='bg-blue-300 min-h-screen'>
       <div className='flex h-20 justify-center items-center'>
-        <h1 className='text-3xl font-semibold'>BOOKINGS</h1>
+        <h1 className='text-3xl font-semibold'>BOOKINGS:</h1>
       </div>
       <div className='p-4 w-full max-w-screen-xl mx-auto'>
 
@@ -70,6 +73,7 @@ export const AllBooking = () => {
           );
         })}
       </div>
+     
     </div>
   );
 };

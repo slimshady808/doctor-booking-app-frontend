@@ -7,15 +7,7 @@ export const Department = () => {
     const [depertmentList,setDepartmentList]= useState([])
 
 
-    // useEffect(()=>{
-    //   async function getDepartments(){
-    //     const response =await axios.get('http://localhost:8000/doctor/departments/')
-    //     console.log(response.data)
-    //     setDepartmentList(response.data)
-        
-    //   }
-    //   getDepartments();
-    // },[])
+   
 
     useEffect(()=>{
       const fetchData= async()=>{
