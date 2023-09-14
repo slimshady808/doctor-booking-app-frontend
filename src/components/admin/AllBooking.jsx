@@ -83,7 +83,7 @@ export const AllBooking = () => {
         })}
         <div className='flex justify-center mt-4'>
           <a
-            href='#'
+        
             onClick={handlePrev}
             disabled={currentPage === 1}
             className={`flex items-center justify-center px-3 h-8 text-sm font-medium ${
@@ -110,7 +110,7 @@ export const AllBooking = () => {
             Previous
           </a>
           <a
-            href='#'
+    
             onClick={handleNext}
             className='flex items-center justify-center px-3 h-8 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white'
           >

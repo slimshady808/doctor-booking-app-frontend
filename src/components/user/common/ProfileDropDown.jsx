@@ -63,7 +63,7 @@ export const ProfileDropDown = () => {
             <span className="ml-2"><Link to={'/user/bookings'} >History</Link> </span>
           </a>
         </li>
-        <li>
+        {/* <li>
           <a
             href="#"
             className="flex items-center px-4 py-2 text-gray-800 hover:bg-gray-100"
@@ -73,7 +73,7 @@ export const ProfileDropDown = () => {
             </svg>
             <span className="ml-2">Edit Profile</span>
           </a>
-        </li>
+        </li> */}
         <li>
           <a
           
