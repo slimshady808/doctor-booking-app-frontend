@@ -20,22 +20,40 @@ export const fetchDoctors= async()=>{
   }
 
 }
-export const fetchBooking= async()=>{
-  try{
-    const token=await getAccess()
-    const token1 = getAccessToken()
-    const headers={
-      Authorization :`Bearer${token}`
+// export const fetchBooking= async()=>{
+//   try{
+//     const token=await getAccess()
+//     const token1 = getAccessToken()
+//     const headers={
+//       Authorization :`Bearer${token}`
+//     };
+//     const response = await axios.get(`${server}/booking/all-bookings/`,{
+//       headers
+//     })
+//     return response
+//   }catch(error){
+//     console.error("error for frtching all bookings",error)
+//     return null
+//   }
+// }
+
+export const fetchBooking = async (page) => {
+  try {
+    const token = await getAccess();
+    const token1 = getAccessToken();
+    const headers = {
+      Authorization: `Bearer ${token}`,
     };
-    const response = await axios.get(`${server}/booking/all-bookings/`,{
-      headers
-    })
-    return response.data
-  }catch(error){
-    console.error("error for frtching all bookings",error)
-    return null
+    const response = await axios.get(`${server}/booking/all-bookings/?page=${page}`, {
+      headers,
+    });
+    return response;
+  } catch (error) {
+    console.error("Error fetching bookings", error);
+    return null;
   }
-}
+};
+
 
 export const blockUser = async (user_id)=>{
   try{

@@ -24,8 +24,9 @@ export const UserBookings = () => {
   
         const data = await fetchUserBookingHistory(fetchedUserId);
         if (data) {
-          // setBookings(data.user_bookings);
-          setBookings([...bookings, ...data.user_bookings]);
+          console.log(data)
+          setBookings(data.user_bookings);
+          // setBookings([...bookings, ...data.user_bookings]);
          
         }
       };
@@ -36,7 +37,7 @@ export const UserBookings = () => {
     console.log(userId, 'userId');
     console.log(bookings, 'bookings');
   
-    // Rest of your component JSX and logic
+   
 
 
 
