@@ -4,7 +4,7 @@ import Banner from '../../components/user/banner'
 import { Department } from '../../components/user/Department'
 
 
-import Navbar from '../../components/user/common/Navbar'
+
 import { Footer } from '../../components/user/common/Footer'
 import { UserNavBar } from '../../components/user/common/UserNavBar'
 import { getAccessToken } from '../../helpers/auth'
@@ -19,7 +19,7 @@ export const HomePage = () => {
   return (
     <div>
     <UserNavBar/>
-    {/* <Navbar/> */}
+
     <Banner/>
     <Department/>
     <Steps/>

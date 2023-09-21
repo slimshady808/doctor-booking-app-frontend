@@ -1,6 +1,6 @@
 import React from 'react'
 import { DoctorDetails } from '../../components/user/DoctorDetails'
-import Navbar from '../../components/user/common/Navbar'
+
 import { UserNavBar } from '../../components/user/common/UserNavBar'
 
 

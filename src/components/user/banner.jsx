@@ -1,5 +1,5 @@
 import React from 'react';
-import bannerImage from './banner.png';
+import bannerImage from '../../images/banner.png';
 import { Link } from 'react-router-dom';
 
 const Banner = () => {
@@ -16,7 +16,7 @@ const Banner = () => {
           Book Appointment:
         </h1>
         <p className="mt-2 sm:mt-4 text-base sm:text-lg md:text-xl font-semibold text-blue-800">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        Simplify your appointments with DocTime
         </p>
         <button className="mt-4 sm:mt-6 px-4 sm:px-8 py-2 sm:py-3 text-white font-semibold bg-blue-600 hover:bg-blue-700 rounded-md shadow-md">
           <Link
