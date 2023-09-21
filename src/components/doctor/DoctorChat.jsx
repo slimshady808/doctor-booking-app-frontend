@@ -4,6 +4,7 @@ import { fetch_user_messages, createMessage } from '../../Services/UserService';
 import { server, wserver } from '../../server';
 import { ChatHeader } from '../user/ChatHeader';
 import {fetchUserData} from '../../Services/DoctorService'
+import { formatRelativeTime} from '../../utils/timeUtiles'
 export const DoctorChat = () => {
     const { userId, doctorId } = useParams();
     const [messages, setMessages] = useState([]);
@@ -41,7 +42,7 @@ export const DoctorChat = () => {
         fetchData();
 
         const roomName = `${userId}_${doctorId}`;
-        //  const newSocket = new WebSocket(`ws://${wserver}/chat/${roomName}/`);
+        // const newSocket = new WebSocket(`ws://${wserver}/chat/${roomName}/`);
         const newSocket = new WebSocket(`wss://${wserver}/chat/${roomName}/`);
         setSocket(newSocket);
     }, [userId]);
@@ -96,8 +97,8 @@ export const DoctorChat = () => {
                     messages.map((message, index) => (
                         <div
                             key={index}
-                            className={`flex mb-4 ${
-                                message.sender == doctorId ? 'justify-end' : 'justify-start'
+                            className={`flex flex-col mb-4 ${
+                                message.sender == doctorId ? 'items-end' : 'items-start'
                             }`}
                         >
                             <div
@@ -109,6 +110,9 @@ export const DoctorChat = () => {
                             >
                                 {message.message_content}
                             </div>
+                            <div className="text-xs text-gray-400 mt-1 ml-2">
+                                {formatRelativeTime(message.timestamp)}
+                                </div>
                         </div>
                     ))
                 )}
