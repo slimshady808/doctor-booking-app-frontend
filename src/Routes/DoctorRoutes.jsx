@@ -11,6 +11,7 @@ import { EditProfilePage } from "../pages/Doctor/EditProfilePage";
 import { getAccess, getAccessToken, getLocal } from "../helpers/auth";
 import { LoginPage } from "../pages/LoginPage";
 import { NotFoundPage } from "../pages/NotFoundPage";
+import { SlotListPage } from "../pages/Doctor/SlotListPage";
 // import { DoctorReveneuPage } from "../pages/Doctor/DoctorReveneuPage";
 
 
@@ -36,6 +37,7 @@ export const DoctorRoutes = () => {
    <Routes>
     <Route path="/history" element={<DoctorHistoryPage/>}/>
     <Route path="/addSlot" element={<DoctorAddSlotPage/>}/>
+    <Route path="/slot" element={<SlotListPage/>}/>
     <Route path="/review" element={<DoctorReviewPage/>}/>
     <Route path="/addReport/:bookingId/:patientId/:doctorId" element={<AddReportPage/>}/>
     <Route path="/addTest/:bookingId/:patientId/:doctorId" element={<AddTestResultPage/>} />

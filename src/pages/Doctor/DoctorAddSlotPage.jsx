@@ -2,7 +2,7 @@ import React from 'react'
 
 import { DoctorSideBar } from '../../components/doctor/DoctorSideBar'
 import { DoctorAddSlot } from '../../components/doctor/DoctorAddSlot'
-import { DoctorSlotList } from '../../components/doctor/DoctorSlotList'
+
 import { DoctorNavBar } from '../../components/doctor/DoctorNavBar'
 
 export const DoctorAddSlotPage = () => {
@@ -12,7 +12,7 @@ export const DoctorAddSlotPage = () => {
 
     <div className='flex'>
       <DoctorSideBar/>
-      <DoctorSlotList/>
+  
       <DoctorAddSlot/>
     </div>
   </>

@@ -3,8 +3,9 @@ import { toast } from 'react-hot-toast'
 import {Toaster} from 'react-hot-toast'
 import {createSlot} from '../../Services/DoctorService'
 import {get_user_data} from '../../helpers/auth'
+import { useNavigate } from 'react-router-dom'
 export const DoctorAddSlot = () => {
-  
+  const navigate=useNavigate()
   const [selectedDate,setSelectedDate]=useState('')
   const [selectedTIme,setSelectedTime]=useState('')
   const [doctor_id,setDoctor_id]=useState('')
@@ -31,6 +32,8 @@ export const DoctorAddSlot = () => {
     const response= await createSlot(slotData)
     if (response){
       toast.success('slot added')
+      navigate('/doctor/slot')
+
     }else{
       // toast.error('error occured')
     }
