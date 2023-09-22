@@ -60,7 +60,7 @@ export const UserList = () => {
                     'No Patients'
                   )}
                 </td>
-                 <td className="py-3 px-6 text-left whitespace-nowrap"><BlockModal user_id={user.id} is_active={user.is_active}/></td>
+                 <td className="py-3 px-6 text-left whitespace-nowrap"><BlockModal user_id={user.id} is_active={!user.is_active}/></td>
               </tr>
             ))}
           </tbody>

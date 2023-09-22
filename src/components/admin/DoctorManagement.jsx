@@ -95,7 +95,8 @@ const handleBlockClick =(id)=>{
                     <td class="px-6 py-4">
                     
 
-                      <BlockModal user_id={doctor.user_profile} is_active={doctor.user_active}/>
+                      <BlockModal user_id={doctor.user_profile} is_active={!doctor.user_active}/>
+                     
                     </td>
                   </tr>
 

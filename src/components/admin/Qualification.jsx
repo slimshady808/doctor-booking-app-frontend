@@ -19,6 +19,7 @@ export const Qualification = () => {
   }, []);
 
   const handleDelete= async (id)=>{
+    
 
     const response= await deleteQualification(id)
     if (response){
