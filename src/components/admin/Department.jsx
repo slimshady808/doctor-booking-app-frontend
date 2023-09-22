@@ -6,10 +6,11 @@ import { BiSolidEdit } from "react-icons/bi";
 import { AiOutlineFileAdd } from "react-icons/ai";
 import { Link } from 'react-router-dom';
 import toast, { Toaster } from 'react-hot-toast';
-
+import {DeleteConfirmationModal} from '../../utils/DeleteConfirmationModal'
 export const Department = () => {
   const [departments, setDepartments] = useState([]);
-
+  const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
+  const [departmentToDelete, setDepartmentToDelete] = useState(null);
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetchDepartment();
@@ -21,16 +22,19 @@ export const Department = () => {
   }, []);
 
   const handleDelete=async(id)=>{
-
-    const response= await deleteDepartment(id)
+    setDepartmentToDelete(id);
+    setShowDeleteConfirmation(true)
+  }
+    const confirmDelete= async()=>{
+    const response= await deleteDepartment(departmentToDelete)
     if (response===204){
-      setDepartments((prevDepartment)=>prevDepartment.filter((department)=>department.id !==id))
+      setDepartments((prevDepartment)=>prevDepartment.filter((department)=>department.id !==departmentToDelete))
       toast.success('deleted')
     }else{
       toast.error('try after some time')
     }
 
-    console.log(id)
+    setShowDeleteConfirmation(false);
   }
 
   return (
@@ -78,6 +82,11 @@ export const Department = () => {
               </td>
             </tr>
           ))}
+          <DeleteConfirmationModal
+            isOpen={showDeleteConfirmation}
+            onRequestClose={() => setShowDeleteConfirmation(false)}
+            onConfirmDelete={confirmDelete}
+          />
         </tbody>
       </table>
     </div>

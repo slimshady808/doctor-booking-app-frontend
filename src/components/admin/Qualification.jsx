@@ -5,9 +5,11 @@ import { FaTrash } from "react-icons/fa";
 import { BiSolidEdit } from "react-icons/bi";
 import { Link } from 'react-router-dom';
 import toast, { Toaster } from 'react-hot-toast';
+import {DeleteConfirmationModal} from '../../utils/DeleteConfirmationModal'
 export const Qualification = () => {
   const [qualifications, setQualifications] = useState([]);
-
+  const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
+  const [qualificationToDelete, setQualificationToDelete] = useState(null);
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetchQualifications();
@@ -18,18 +20,23 @@ export const Qualification = () => {
     fetchData();
   }, []);
 
-  const handleDelete= async (id)=>{
-    
+  const handleDelete = async (id) => {
+    setQualificationToDelete(id);
+    setShowDeleteConfirmation(true);
+  };
 
-    const response= await deleteQualification(id)
-    if (response){
-        setQualifications((prevQualification)=>prevQualification.filter((qualification)=>qualification.id !==id))
-        toast.success('deleted')
-    }else{
-      toast.error('try after some time')
+  const confirmDelete = async () => {
+    const response = await deleteQualification(qualificationToDelete);
+    if (response) {
+      setQualifications((prevQualification) =>
+        prevQualification.filter((qualification) => qualification.id !== qualificationToDelete)
+      );
+      toast.success('Deleted');
+    } else {
+      toast.error('Try again later');
     }
- 
-  }
+    setShowDeleteConfirmation(false);
+  };
 
   return (
     <div>
@@ -82,6 +89,11 @@ export const Qualification = () => {
               </td>
             </tr>
           ))}
+          <DeleteConfirmationModal
+        isOpen={showDeleteConfirmation}
+        onRequestClose={() => setShowDeleteConfirmation(false)}
+        onConfirmDelete={confirmDelete}
+      />
         </tbody>
       </table>
     </div>

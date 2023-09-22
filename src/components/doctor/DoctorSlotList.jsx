@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { fetchSlots } from '../../Services/DoctorService';
 import { get_user_data } from '../../helpers/auth';
-
+import {DeleteConfirmationModal} from '../../utils/DeleteConfirmationModal'
 import {deleteSlot} from '../../Services/DoctorService'
 import { toast,Toaster } from "react-hot-toast";
 import { Link } from 'react-router-dom';
@@ -10,7 +10,8 @@ import { FaTrash } from "react-icons/fa";
 export const DoctorSlotList = () => {
   const [doctor_id, setDoctor_id] = useState('');
   const [slots, setSlots] = useState([]);
-  
+  const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
+  const [slotToDelete, setSlotToDelete] = useState(null);
   useEffect(() => {
     const user = get_user_data();
     setDoctor_id(user.user_id);
@@ -31,14 +32,19 @@ export const DoctorSlotList = () => {
   }, [doctor_id]);
 
   const handleDeleteSlot= async (slot_id)=>{
-    const data= await deleteSlot(slot_id)
+    setSlotToDelete(slot_id)
+    setShowDeleteConfirmation(true)
+  }
+  const confirmDelete = async ()=>{
+
+    const data= await deleteSlot(slotToDelete)
     if (data.status===204){
-      setSlots((prevSlots)=>prevSlots.filter((slot)=>slot.id != slot_id))
+      setSlots((prevSlots)=>prevSlots.filter((slot)=>slot.id != slotToDelete))
       toast.success('slot deleted')
     }else{
       toast.error('please try again')
     }
-
+    setShowDeleteConfirmation(false);
   }
 
   return (
@@ -76,14 +82,7 @@ export const DoctorSlotList = () => {
               <td className="px-6 py-4 whitespace-nowrap">{slot.time}</td>
               <td className="px-6 py-4 whitespace-nowrap">{slot.date}</td>
               <td className="px-6 py-4 whitespace-nowrap">
-              {/* <Link to={`/admin/edit_qualification/${qualification.id}`}>
-                <button
-                  className="bg-gray-200 text-gray-700 px-2 py-1 rounded-md mr-2"
-                  
-                >
-                <BiSolidEdit/>
-                </button>
-                </Link> */}
+             
                 <button
                   className="bg-red-500 text-white px-2 py-1 rounded-md"
                   onClick={() => handleDeleteSlot(slot.id)}
@@ -93,6 +92,11 @@ export const DoctorSlotList = () => {
               </td>
             </tr>
           ))}
+          <DeleteConfirmationModal
+        isOpen={showDeleteConfirmation}
+        onRequestClose={() => setShowDeleteConfirmation(false)}
+        onConfirmDelete={confirmDelete}
+      />
         </tbody>
       </table>
     </div>

@@ -5,9 +5,11 @@ import { FaTrash } from "react-icons/fa";
 import { BiSolidEdit } from "react-icons/bi";
 import { Link } from 'react-router-dom';
 import toast, { Toaster } from 'react-hot-toast';
-
+import {DeleteConfirmationModal} from '../../utils/DeleteConfirmationModal'
 export const TestTitles = () => {
   const [testTitles, setTestTitles] = useState([]);
+  const [showDeleteConfirmation,setShowDeleteConfirmation]=useState(false)
+  const [testToDelete,setTestToDelete]=useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -20,13 +22,19 @@ export const TestTitles = () => {
   }, []);
 
   const handleDelete = async (id) => {
-    const response = await deleteTestTitles(id);
+    setTestToDelete(id);
+    setShowDeleteConfirmation(true)
+  }
+  const confirmDelete= async()=>{
+
+    const response = await deleteTestTitles(testToDelete);
     if (response) {
-      setTestTitles((prevTestTitles) => prevTestTitles.filter((testTitle) => testTitle.id !== id));
+      setTestTitles((prevTestTitles) => prevTestTitles.filter((testTitle) => testTitle.id !== testToDelete));
       toast.success('Deleted');
     } else {
       toast.error('Try again later');
     }
+    setShowDeleteConfirmation(false)
   };
 
   return (
@@ -78,6 +86,11 @@ export const TestTitles = () => {
                 </td>
               </tr>
             ))}
+                <DeleteConfirmationModal
+                isOpen={showDeleteConfirmation}
+                onRequestClose={() => setShowDeleteConfirmation(false)}
+                onConfirmDelete={confirmDelete}
+              />
           </tbody>
         </table>
       </div>
