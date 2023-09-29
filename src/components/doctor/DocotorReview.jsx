@@ -30,35 +30,7 @@ const averageRating = reviews.reduce((total, review) => total + review.rating, 0
 
 
   return (
-  //   <div className="bg-gray-100 min-h-screen py-6">
-  //   <div className="max-w-3xl mx-auto px-4">
-  //     <h1 className="text-2xl font-semibold mb-4">Doctor Reviews</h1>
-  //     <div className="space-y-4">
-  //       {reviews.map((review) => (
-  //         <div
-  //           key={review.id}
-  //           className="bg-white p-4 rounded-lg shadow-md"
-  //         >
-  //           <div className="flex items-center justify-between">
-  //             <h2 className="text-lg font-semibold">
-  //               {review.user_name}
-  //             </h2>
-  //             <span className="text-gray-500">{review.created_at}</span>
-  //           </div>
-  //           <p className="mt-2 text-gray-700">{review.content}</p>
-  //           <div className="mt-2 flex items-center">
-  //             <span className="text-yellow-400 mr-1">
-  //             <StarRating rating={review.rating} />
-  //             </span>
-  //             <span className="text-gray-500">
-                
-  //             </span>
-  //           </div>
-  //         </div>
-  //       ))}
-  //     </div>
-  //   </div>
-  // </div>
+
 
   <div className="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
   <div className="grid gap-8 row-gap-5 lg:grid-cols-3">
