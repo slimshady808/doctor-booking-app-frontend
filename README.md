@@ -97,8 +97,8 @@ The following environmental variables should be set in your `.env` file:
 
 ## Screen Shot
 
-![Homepage](screenshots/home.jpg)
+![Homepage](Screenshots/home.jpg)
 
-![Homepage](screenshots/doc.jpg)
+![Homepage](Screenshots/doc.jpg)
 
-![Homepage](screenshots/booking.jpg)
+![Homepage](Screenshots/booking.jpg)
