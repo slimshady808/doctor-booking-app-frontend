@@ -3,6 +3,7 @@
 Welcome to the Doctime frontend repository. This repository contains the frontend code for the Doctime project, a doctor booking application built with Vite and React.
 
 ## Table of Contents
+- [Demo](#demo)
 - [Project Overview](#project-overview)
 - [Features](#features)
 - [Prerequisites](#prerequisites)
@@ -10,6 +11,12 @@ Welcome to the Doctime frontend repository. This repository contains the fronten
 - [Development](#development)
 - [Production Build](#production-build)
 - [Environment Variables](#environmental-variable)
+- [Screen Shots](#screen-shots)
+
+
+## Demo
+
+Check out the live demo of GadgetGallery at [docTime](https://doctime.netlify.app/).
 
 
 ## Project Overview
@@ -95,7 +102,7 @@ The following environmental variables should be set in your `.env` file:
 - `VITE_SERVER`
 - `VITE_WSERVER`
 
-## Screen Shot
+## Screen Shots
 
 ![Homepage](Screenshots/home.jpg)
 
