@@ -36,8 +36,11 @@ const handleSubmit = async (e) => {
     console.log('decoded',decoded)
     // dispatch(updateUser(decoded));
     console.log('tkn',response)
+    if (response){
+      history('/')
+    }
     // dispatch(updateAuthToken(response));
-    history('/')
+    
   }catch (error){
     toast.error('Invalid User Credential')
   }
