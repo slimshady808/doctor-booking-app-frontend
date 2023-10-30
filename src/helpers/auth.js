@@ -1,7 +1,11 @@
 import { toast} from "react-hot-toast";
 import jwt_decode from 'jwt-decode'
 import {server} from '../server'
+import axios from 'axios';
+import { useNavigate } from "react-router-dom";
 export default async function login(e){
+  const navigate=useNavigate()
+
   let response =await fetch(`${server}/api/token/`,{
     method: 'POST',
     headers:{
@@ -16,7 +20,9 @@ export default async function login(e){
   if (response.status==200){
     localStorage.setItem('authToken',JSON.stringify(data))
     toast.success('Login success')
+    navigate('/')
     return data;
+    
   }
   else{
     console.log('invalid')
@@ -38,7 +44,7 @@ export function getAccessToken() {
   return null; // Return null if no authToken is found in localStorage
 }
 
-import axios from 'axios';
+
 
 export async function getAccess() {
   let response = localStorage.getItem('authToken');
