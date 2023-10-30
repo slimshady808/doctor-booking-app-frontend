@@ -1,4 +1,4 @@
-import { toast} from "react-hot-toast";
+
 import jwt_decode from 'jwt-decode'
 import {server} from '../server'
 import axios from 'axios';
@@ -19,9 +19,10 @@ export default async function login(e){
   console.log(response,"from log in")
   if (response.status==200){
     localStorage.setItem('authToken',JSON.stringify(data))
-    toast.success('Login success')
+    const fg=localStorage.getItem('authToken')
+    console.log(fg,'gy')
     
-    return data;
+    return response;
     
   }
   else{

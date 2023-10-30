@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import login, { getAccessToken, getLocal } from '../helpers/auth';
-import {Link,useNavigate} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
 import {useEffect} from 'react'
 import jwt_decode from 'jwt-decode'
 import {Toaster} from 'react-hot-toast'
@@ -10,7 +10,7 @@ import {toast} from 'react-hot-toast'
 
 export const LoginPage = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const history= useNavigate()
+  const navigate=useNavigate()
 
   // const {user,authToken}=useSelector((state)=>state.auth);
   // const dispatch=useDispatch();
@@ -18,7 +18,9 @@ export const LoginPage = () => {
   
   useEffect(()=>{
     if (response){
-      history('/')
+      navigate('/')
+    }else{
+      navigate('/login')
     }
   })
 
@@ -26,25 +28,51 @@ export const LoginPage = () => {
     setShowPassword(!showPassword);
   };
   
-
-const handleSubmit = async (e) => {
- 
-  e.preventDefault();
-  try{
-    const response = await login(e);
-    const decoded = jwt_decode(response.access);
-    console.log('decoded',decoded)
-    // dispatch(updateUser(decoded));
-    console.log('tkn',response)
-    if (response){
-      history('/')
-    }
-    // dispatch(updateAuthToken(response));
-    
-  }catch (error){
-    toast.error('Invalid User Credential')
+  const handleSubmit = (e)=>{
+    e.preventDefault()
+    login(e).then((response)=>{
+      console.log('porth',response)
+      if(response.status==200){
+        console.log('200')
+        toast.success('log in')
+        navigate("/")
+      }else{
+        console.log('elsee')
+      }
+    }).catch((err)=>{
+      console.log(err)
+    })
   }
-};
+
+// const handleSubmit = async (e) => {
+ 
+//   e.preventDefault();
+//   try{
+//     const response = await login(e);
+//     console.log(response.status)
+
+
+    
+//     // if (response?.status==200){
+//     //   console.log('kayari')
+//     //   toast.success('Login success')
+//     //   navigate('/')
+//     // }else{
+//     //   toast.error('Invalid User Credential')
+//     // }
+//     // const decoded = jwt_decode(response.access);
+//     // console.log('decoded',decoded)
+//     // // dispatch(updateUser(decoded));
+//     // console.log('tkn',response)
+//     // if (response){
+//     //   history('/')
+//     // }
+//     // dispatch(updateAuthToken(response));
+    
+//   }catch (error){
+//     toast.error('Invalid User Credential')
+//   }
+// };
 
 return (
   <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-indigo-400 to-blue-600 py-12 px-4 sm:px-6 lg:px-8">
