@@ -20,7 +20,7 @@ export default async function login(e){
   if (response.status==200){
     localStorage.setItem('authToken',JSON.stringify(data))
     toast.success('Login success')
-    navigate('/')
+    
     return data;
     
   }
