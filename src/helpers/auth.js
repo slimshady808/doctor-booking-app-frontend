@@ -2,9 +2,9 @@ import { toast} from "react-hot-toast";
 import jwt_decode from 'jwt-decode'
 import {server} from '../server'
 import axios from 'axios';
-import { useNavigate } from "react-router-dom";
+
 export default async function login(e){
-  const navigate=useNavigate()
+  
 
   let response =await fetch(`${server}/api/token/`,{
     method: 'POST',
