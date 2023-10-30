@@ -14,7 +14,7 @@ export const AdminPage = () => {
     <AdminSideBar/>
 
     {/* <AdminDashBoard/> */}
-    {/* <DoctorManagement/> */}
+    <DoctorManagement/>
     </div>
     </div>
   )
