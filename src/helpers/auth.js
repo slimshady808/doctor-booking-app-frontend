@@ -2,6 +2,8 @@ import { toast} from "react-hot-toast";
 import jwt_decode from 'jwt-decode'
 import {server} from '../server'
 import {useNavigate} from 'react-router-dom'
+import axios from 'axios';
+
 export default async function login(e){
   const navigate=useNavigate()
   let response =await fetch(`${server}/api/token/`,{
@@ -41,8 +43,7 @@ export function getAccessToken() {
   return null; // Return null if no authToken is found in localStorage
 }
 
-import axios from 'axios';
-import { useNavigate } from "react-router-dom";
+
 
 export async function getAccess() {
   let response = localStorage.getItem('authToken');
