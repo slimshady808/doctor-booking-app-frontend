@@ -2,7 +2,7 @@
 import jwt_decode from 'jwt-decode'
 import {server} from '../server'
 import axios from 'axios';
-
+import {toast} from 'react-hot-toast'
 export default async function login(e){
   
 
@@ -26,7 +26,7 @@ export default async function login(e){
     
   }
   else{
-    console.log('invalid')
+    toast.error('invalid credential')
   }
 }
 
